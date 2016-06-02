@@ -1,2 +1,4 @@
 # elastic-email
-PHP Library for Elastic Email platform. 
+PHP Library for [Elastic Email platform API](http://api.elasticemail.com/public/help).
+
+## TODO
