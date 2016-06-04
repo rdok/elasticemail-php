@@ -8,4 +8,5 @@ namespace Src\Api;
 
 interface Request
 {
+    public function getHttpClient();
 }

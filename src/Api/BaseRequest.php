@@ -10,7 +10,7 @@ use GuzzleHttp\Client;
 
 abstract class BaseRequest
 {
-    protected $baseUrl = 'https://api.elasticemail.com/v2';
+    protected $baseUrl = 'https://api.elasticemail.com/v2/';
     /**
      * @var Client
      */
@@ -21,5 +21,15 @@ abstract class BaseRequest
         $this->httpClient = new Client([
             'base_uri' => $this->baseUrl,
         ]);
+    }
+
+    /**
+     * Get the HTTP status code.
+     *
+     * @return mixed
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
     }
 }

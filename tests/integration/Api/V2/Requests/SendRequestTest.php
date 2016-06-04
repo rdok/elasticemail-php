@@ -40,9 +40,9 @@ class SendRequestTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @vcr sends_email
+     * @vcr email.send.successful.yml
      */
-    public function sends_email()
+    public function send_successful_email()
     {
         $response = $this->sendRequest->send($this->emailData);
 
@@ -59,5 +59,21 @@ class SendRequestTest extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($response->getData());
 
         $this->assertNotEmpty($response->getTransactionId());
+    }
+
+    /**
+     * @test
+     * @vcr email.send.missing_api_key.yml
+     * @expectedException Exception
+     */
+    public function api_key_is_missing()
+    {
+        $this->expectExceptionMessage('Missing required parameter - apikey');
+
+        $response = $this->sendRequest->send($this->emailData);
+
+        $this->assertFalse($response->wasSuccessful());
+
+        $this->assertSame('Missing required parameter - apikey', $response->getErrorMessage());
     }
 }

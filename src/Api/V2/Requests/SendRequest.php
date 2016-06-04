@@ -14,17 +14,12 @@ class SendRequest extends BaseRequest implements Request
 {
     public function send(array $emailData)
     {
-        $response = $this->httpClient->request('POST', '/email/send', [
+        $response = $this->httpClient->request('POST', 'email/send', [
             'form_params' => [
                 $emailData
             ],
         ]);
 
         return (new SendResponse($response));
-    }
-
-    public function getStatusCode()
-    {
-        return 200;
     }
 }
