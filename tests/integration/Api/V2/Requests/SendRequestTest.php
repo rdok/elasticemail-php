@@ -1,4 +1,5 @@
 <?php
+use Dotenv\Dotenv;
 use Faker\Factory;
 use Faker\Generator;
 use Src\Api\Response;
@@ -25,9 +26,9 @@ class SendRequestTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->faker = Factory::create();
-//        $dotenv = new Dotenv(__DIR__.'/../../../..');
-//        $dotenv->load();
-        $this->sendRequest = new SendRequest();
+        $dotenv = new Dotenv(__DIR__.'/../../../../../');
+        $dotenv->load();
+        $this->sendRequest = new SendRequest(['apikey' => getenv('ELASTIC_EMAIL_API_KEY')]);
         $this->emailData = [
             'from'      => '***REMOVED***',
             'from_name' => 'From Name',
@@ -63,17 +64,13 @@ class SendRequestTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @vcr email.send.missing_api_key.yml
+     * @vcr email.send.missing_apikey.yml
      * @expectedException Exception
      */
-    public function api_key_is_missing()
+    public function apikey_is_missing()
     {
-        $this->expectExceptionMessage('Missing required parameter - apikey');
+        $this->expectExceptionMessage('Missing required parameter: apikey');
 
-        $response = $this->sendRequest->send($this->emailData);
-
-        $this->assertFalse($response->wasSuccessful());
-
-        $this->assertSame('Missing required parameter - apikey', $response->getErrorMessage());
+        $this->sendRequest = new SendRequest([]);
     }
 }

@@ -24,7 +24,7 @@ abstract class BaseResponse
         $this->response = json_decode($client->getBody()->getContents());
 
         if (!$this->wasSuccessful()) {
-            throw new \Exception('Missing required parameter - apikey');
+            throw new \Exception($this->getErrorMessage());
         }
     }
 
@@ -39,6 +39,20 @@ abstract class BaseResponse
     }
 
     /**
+     * The API error message response of the requested action.
+     *
+     * @return string
+     */
+    public function getErrorMessage()
+    {
+        if ($this->wasSuccessful()) {
+            return null;
+        }
+
+        return $this->response->error;
+    }
+
+    /**
      * Get the HTTP status code.
      *
      * @return mixed
@@ -46,16 +60,6 @@ abstract class BaseResponse
     public function getHttpClient()
     {
         return $this->httpClient;
-    }
-
-    /**
-     * The API error message response of the requested action.
-     *
-     * @return bool
-     */
-    public function getErrorMessage()
-    {
-        return $this->response->error;
     }
 
     /**

@@ -1,4 +1,4 @@
 /vendor/
-/.env
+.env
 /tests/fixtures/*
 !/tests/fixtures/.gitignore
