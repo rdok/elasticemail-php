@@ -4,10 +4,10 @@
  * @since 6/4/16
  */
 
-namespace Src\Api\V2\Responses;
+namespace Src\V2\Email\Send;
 
-use Src\Api\BaseResponse;
-use Src\Api\Response;
+use Src\BaseResponse;
+use Src\Response;
 
 class SendResponse extends BaseResponse implements Response
 {

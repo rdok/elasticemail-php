@@ -4,10 +4,13 @@
  * @since 6/4/16
  */
 
-namespace Src\Api;
+namespace Src;
 
 interface Response
 {
+    /**
+     * @return \GuzzleHttp\Psr7\Response
+     */
     public function getHttpClient();
 
     /**
@@ -27,7 +30,7 @@ interface Response
     /**
      * The API data response.
      *
-     * @return bool
+     * @return array
      */
     public function getData();
 }

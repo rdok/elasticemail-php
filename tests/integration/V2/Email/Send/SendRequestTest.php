@@ -1,34 +1,26 @@
 <?php
-use Dotenv\Dotenv;
-use Faker\Factory;
-use Faker\Generator;
-use Src\Api\Response;
-use Src\Api\V2\Requests\SendRequest;
+use Src\Response;
+use Src\V2\ElasticEmailV2;
+use Src\V2\Email\Send;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
  * @since 6/3/16
  */
-class SendRequestTest extends PHPUnit_Framework_TestCase
+class SendRequestTest extends TestCase
 {
     /**
-     * @var Generator
+     * @var ElasticEmailV2
      */
-    protected $faker;
-    /**
-     * @var SendRequest
-     */
-    protected $sendRequest;
+    protected $elasticEmail;
     protected $emailData;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->faker = Factory::create();
-        $dotenv = new Dotenv(__DIR__.'/../../../../../');
-        $dotenv->load();
-        $this->sendRequest = new SendRequest(['apikey' => getenv('ELASTIC_EMAIL_API_KEY')]);
+        $this->elasticEmail = new ElasticEmailV2(['apikey' => getenv('ELASTIC_EMAIL_API_KEY')]);
+
         $this->emailData = [
             'from'      => '***REMOVED***',
             'from_name' => 'From Name',
@@ -45,7 +37,7 @@ class SendRequestTest extends PHPUnit_Framework_TestCase
      */
     public function send_successful_email()
     {
-        $response = $this->sendRequest->send($this->emailData);
+        $response = $this->elasticEmail->email()->send($this->emailData);
 
         $this->assertInstanceOf(Response::class, $response);
 
@@ -71,6 +63,8 @@ class SendRequestTest extends PHPUnit_Framework_TestCase
     {
         $this->expectExceptionMessage('Missing required parameter: apikey');
 
-        $this->sendRequest = new SendRequest([]);
+        $this->elasticEmail = new ElasticEmailV2([]);
+
+        $this->elasticEmail->email();
     }
 }

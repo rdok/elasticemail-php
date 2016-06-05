@@ -4,7 +4,7 @@
  * @since 6/4/16
  */
 
-namespace Src\Api;
+namespace Src;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response as Psr7Response;

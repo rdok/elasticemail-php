@@ -4,12 +4,14 @@
  * @since 6/4/16
  */
 
-namespace Src\Api;
+namespace Src;
 
 use GuzzleHttp\Client;
 
 abstract class BaseRequest
 {
+    const BASE_URI = 'base_uri';
+
     protected $baseUrlV2 = 'https://api.elasticemail.com/v2/';
 
     /**
@@ -26,7 +28,7 @@ abstract class BaseRequest
         $this->setConfig($config);
 
         $this->httpClient = new Client([
-            'base_uri' => $this->baseUrlV2,
+            self::BASE_URI => $this->config[self::BASE_URI],
         ]);
     }
 
@@ -36,7 +38,11 @@ abstract class BaseRequest
             throw new \Exception('Missing required parameter: apikey');
         }
 
-        $this->config['apikey'] = $config['apikey'];
+        if (!isset($config[self::BASE_URI])) {
+            throw new \Exception('Missing required parameter: base_uri');
+        }
+
+        $this->config = $config;
     }
 
     /**
