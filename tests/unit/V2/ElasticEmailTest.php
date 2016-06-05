@@ -2,7 +2,7 @@
 
 use Dotenv\Dotenv;
 use Src\V2\ElasticEmailV2;
-use Src\V2\Requests\SendRequest;
+use Src\V2\Email\Send\SendRequest;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>

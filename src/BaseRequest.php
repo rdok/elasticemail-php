@@ -11,9 +11,7 @@ use GuzzleHttp\Client;
 abstract class BaseRequest
 {
     const BASE_URI = 'base_uri';
-
-    protected $baseUrlV2 = 'https://api.elasticemail.com/v2/';
-
+    const APIKEY = 'apikey';
     /**
      * @var Client
      */
@@ -34,7 +32,7 @@ abstract class BaseRequest
 
     public function setConfig(array $config)
     {
-        if (!isset($config['apikey'])) {
+        if (!isset($config[self::APIKEY])) {
             throw new \Exception('Missing required parameter: apikey');
         }
 

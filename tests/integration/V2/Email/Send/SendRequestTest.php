@@ -1,7 +1,8 @@
 <?php
+use Src\BaseRequest;
 use Src\Response;
-use Src\V2\ElasticEmailV2;
 use Src\V2\Email\Send;
+use Src\V2\Email\Send\SendRequest;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
@@ -10,16 +11,19 @@ use Src\V2\Email\Send;
 class SendRequestTest extends TestCase
 {
     /**
-     * @var ElasticEmailV2
+     * @var SendRequest
      */
-    protected $elasticEmail;
+    protected $sendRequest;
     protected $emailData;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->elasticEmail = new ElasticEmailV2(['apikey' => getenv('ELASTIC_EMAIL_API_KEY')]);
+        $this->sendRequest = new SendRequest([
+            BaseRequest::APIKEY   => getenv('ELASTIC_EMAIL_API_KEY'),
+            BaseRequest::BASE_URI => 'https://api.elasticemail.com/v2/'
+        ]);
 
         $this->emailData = [
             'from'      => '***REMOVED***',
@@ -37,7 +41,7 @@ class SendRequestTest extends TestCase
      */
     public function send_successful_email()
     {
-        $response = $this->elasticEmail->email()->send($this->emailData);
+        $response = $this->sendRequest->send($this->emailData);
 
         $this->assertInstanceOf(Response::class, $response);
 
@@ -63,8 +67,18 @@ class SendRequestTest extends TestCase
     {
         $this->expectExceptionMessage('Missing required parameter: apikey');
 
-        $this->elasticEmail = new ElasticEmailV2([]);
+        $this->sendRequest = new SendRequest([BaseRequest::BASE_URI => 'some-base-uri']);
+    }
 
-        $this->elasticEmail->email();
+    /**
+     * @test
+     * @vcr email.send.missing_apikey.yml
+     * @expectedException Exception
+     */
+    public function base_uri_is_missing()
+    {
+        $this->expectExceptionMessage('Missing required parameter: base_uri');
+
+        $this->sendRequest = new SendRequest([BaseRequest::APIKEY => 'some-api']);
     }
 }
