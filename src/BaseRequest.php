@@ -10,8 +10,8 @@ use GuzzleHttp\Client;
 
 abstract class BaseRequest
 {
-    const BASE_URI = 'base_uri';
-    const APIKEY = 'apikey';
+    const BASE_URI_KEY = 'base_uri';
+    const API_KEY = 'apikey';
     /**
      * @var Client
      */
@@ -26,17 +26,17 @@ abstract class BaseRequest
         $this->setConfig($config);
 
         $this->httpClient = new Client([
-            self::BASE_URI => $this->config[self::BASE_URI],
+            self::BASE_URI_KEY => $this->config[self::BASE_URI_KEY],
         ]);
     }
 
     public function setConfig(array $config)
     {
-        if (!isset($config[self::APIKEY])) {
+        if (!isset($config[self::API_KEY])) {
             throw new \Exception('Missing required parameter: apikey');
         }
 
-        if (!isset($config[self::BASE_URI])) {
+        if (!isset($config[self::BASE_URI_KEY])) {
             throw new \Exception('Missing required parameter: base_uri');
         }
 

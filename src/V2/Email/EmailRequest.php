@@ -4,12 +4,12 @@
  * @since 6/3/16
  */
 
-namespace Src\V2\Email\Send;
+namespace Src\V2\Email;
 
 use Src\BaseRequest;
 use Src\Request;
 
-class SendRequest extends BaseRequest implements Request
+class EmailRequest extends BaseRequest implements Request
 {
     public function send(array $emailData)
     {
@@ -18,5 +18,10 @@ class SendRequest extends BaseRequest implements Request
         ]);
 
         return (new SendResponse($response));
+    }
+
+    public function getStatus()
+    {
+        return new GetStatusResponse();
     }
 }

@@ -8,7 +8,7 @@ namespace Src\V2;
 
 use Src\BaseRequest;
 use Src\V2;
-use Src\V2\Email\Send\SendRequest;
+use Src\V2\Email\EmailRequest;
 
 class ElasticEmailV2
 {
@@ -31,14 +31,14 @@ class ElasticEmailV2
     {
         $this->config = $config;
 
-        $this->config[BaseRequest::BASE_URI] = $this->baseUrlV2;
+        $this->config[BaseRequest::BASE_URI_KEY] = $this->baseUrlV2;
     }
 
     /**
-     * @return SendRequest
+     * @return EmailRequest
      */
     public function email()
     {
-        return new SendRequest($this->config);
+        return new EmailRequest($this->config);
     }
 }

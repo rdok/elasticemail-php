@@ -2,7 +2,7 @@
 
 use Dotenv\Dotenv;
 use Src\V2\ElasticEmailV2;
-use Src\V2\Email\Send\SendRequest;
+use Src\V2\Email\EmailRequest;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
@@ -26,6 +26,6 @@ class ElasticEmailTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function initialize_send_request()
     {
-        $this->assertInstanceOf(SendRequest::class, $this->elasticEmail->email());
+        $this->assertInstanceOf(EmailRequest::class, $this->elasticEmail->email());
     }
 }
