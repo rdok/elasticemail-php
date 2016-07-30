@@ -1,9 +1,7 @@
 <?php
 use Src\BaseRequest;
-use Src\Response;
 use Src\V2\Email\EmailRequest;
-use Src\V2\Email\GetStatusResponse;
-use Src\V2\Email\SendResponse;
+use Src\V2\Email\EmailResponse;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
@@ -13,28 +11,28 @@ class EmailRequestTest extends TestCase
 {
     /**
      * @test
-     * @vcr integration.email.send.request.yml
+     * @vcr email_send_request_is_initialized_successfully.yml
      */
-    public function send_email_send_request()
+    public function email_send_request_is_initialized_successfully()
     {
-        $response = $this->elasticEmailV2->email()->send($this->emailData);
+        $emailResponse = $this->elasticEmail->email()->send($this->emailData);
 
-        $this->assertInstanceOf(SendResponse::class, $response);
+        $this->assertInstanceOf(EmailResponse::class, $emailResponse);
 
-        $this->assertNotNull($response);
+        $this->assertNotNull($emailResponse);
     }
 
     /**
      * @test
-     * @vcr integration.email.request.getStatus.yml
+     * @vcr gets_successful_status_response.yml
      */
-    public function send_email_get_status_request()
+    public function gets_successful_status_response()
     {
-        $response = $this->elasticEmailV2->email()->send($this->emailData);
+        $emailResponse = $this->elasticEmail->email()->send($this->emailData)->getResponse();
 
-        $getStatusData = ['transactionID' => $response->getTransactionId()];
+        $getStatusData = ['transactionID' => $emailResponse->getTransactionId()];
 
-        $response = $this->elasticEmailV2->email()->getStatus($getStatusData);
+        $response = $this->elasticEmail->email()->getStatus($getStatusData);
 
         $this->assertInstanceOf(GetStatusResponse::class, $response);
 

@@ -24,8 +24,8 @@ class ElasticEmailTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function initialize_send_request()
+    public function initializes_send_request()
     {
-        $this->assertInstanceOf(EmailRequest::class, $this->elasticEmail->email());
+        $this->assertInstanceOf(EmailRequest::class, $this->elasticEmail->email()->getRequest());
     }
 }

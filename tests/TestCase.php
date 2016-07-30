@@ -11,7 +11,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     /**
      * @var ElasticEmailV2
      */
-    protected $elasticEmailV2;
+    protected $elasticEmail;
 
     /**
      * @var array
@@ -25,7 +25,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
         $dotenv = new Dotenv(__DIR__.'/..');
         $dotenv->load();
 
-        $this->elasticEmailV2 = new ElasticEmailV2(['apikey' => getenv('ELASTIC_EMAIL_API_KEY')]);
+        $this->elasticEmail = new ElasticEmailV2(['apikey' => getenv('ELASTIC_EMAIL_API_KEY')]);
 
         $this->emailData = [
             'from'      => '***REMOVED***',

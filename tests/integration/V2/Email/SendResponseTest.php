@@ -12,7 +12,7 @@ class SendResponseTest extends TestCase
      */
     public function returns_valid_transaction_id()
     {
-        $response = $this->elasticEmailV2->email()->send($this->emailData);
+        $response = $this->elasticEmail->email()->send($this->emailData);
 
         $this->assertSame(200, $response->getHttpClient()->getStatusCode());
 
