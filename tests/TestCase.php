@@ -1,6 +1,10 @@
 <?php
+
+namespace Tests;
+
 use Dotenv\Dotenv;
-use Src\V2\ElasticEmailV2;
+use PHPUnit_Framework_TestCase;
+use Src\ElasticEmailV2;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>

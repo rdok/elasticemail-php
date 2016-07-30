@@ -1,5 +1,9 @@
 <?php
 
+namespace Tests\integration\V2\Email;
+
+use Tests\TestCase;
+
 /**
  * @author Rizart Dokollari <***REMOVED***>
  * @since 6/5/16

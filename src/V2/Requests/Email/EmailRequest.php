@@ -4,11 +4,11 @@
  * @since 6/3/16
  */
 
-namespace Src\V2\Email;
+namespace Src\V2\Requests\Email;
 
-use Src\BaseRequest;
-use Src\Exceptions\RequestException;
-use Src\Request;
+use Src\V2\Email\EmailResponse;
+use Src\V2\Requests\BaseRequest;
+use Src\V2\Requests\Request;
 
 class EmailRequest extends BaseRequest implements Request
 {
@@ -23,13 +23,21 @@ class EmailRequest extends BaseRequest implements Request
      */
     public function send(array $emailData)
     {
-        $response = $this->httpClient->request('POST', 'email/send', [
+        $response = $this->getHttpClient()->request('POST', 'email/send', [
             'form_params' => array_merge($this->config, $emailData),
         ]);
 
         $this->setResponse(new EmailResponse($response));
 
         return $this;
+    }
+
+    /**
+     * @return \GuzzleHttp\Psr7\Response
+     */
+    public function getHttpClient()
+    {
+        // TODO: Implement getHttpClient() method.
     }
 
     /**

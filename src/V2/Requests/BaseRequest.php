@@ -7,40 +7,29 @@
 namespace Src\V2\Requests;
 
 use GuzzleHttp\Client;
+use Src\ElasticEmailV2;
+use Src\V2\Requests\Email\RequestException;
 
 abstract class BaseRequest
 {
-    const BASE_URI_KEY = 'base_uri';
-    const API_KEY = 'apikey';
     /**
      * @var Client
      */
-    protected $httpClient;
+    private $httpClient;
     /**
-     * @var array
+     * @var string
      */
-    protected $config;
+    private $apiKey;
 
     public function __construct(array $config)
     {
-        $this->setConfig($config);
+        $baseUri = array_key_exists(
+            ElasticEmailV2::BASE_URI_KEY, $config) ? $config[ElasticEmailV2::BASE_URI_KEY] : null;
+        $apiKey = array_key_exists(ElasticEmailV2::API_KEY, $config) ? $config[ElasticEmailV2::API_KEY] : null;
 
-        $this->httpClient = new Client([
-            self::BASE_URI_KEY => $this->config[self::BASE_URI_KEY],
-        ]);
-    }
+        $this->setHttpClient($baseUri);
 
-    public function setConfig(array $config)
-    {
-        if (!isset($config[self::API_KEY])) {
-            throw new \Exception('Missing required parameter: apikey');
-        }
-
-        if (!isset($config[self::BASE_URI_KEY])) {
-            throw new \Exception('Missing required parameter: base_uri');
-        }
-
-        $this->config = $config;
+        $this->setApiKey($apiKey);
     }
 
     /**
@@ -51,5 +40,34 @@ abstract class BaseRequest
     public function getHttpClient()
     {
         return $this->httpClient;
+    }
+
+    /**
+     * @param $baseUri
+     * @throws RequestException
+     */
+    public function setHttpClient($baseUri)
+    {
+        if (!filter_var($baseUri, FILTER_VALIDATE_URL)) {
+            throw new RequestException('Invalid base uri.');
+        }
+
+        $this->httpClient = new Client(['base_uri' => $baseUri]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getApiKey()
+    {
+        return $this->apiKey;
+    }
+
+    /**
+     * @param string $apiKey
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
     }
 }

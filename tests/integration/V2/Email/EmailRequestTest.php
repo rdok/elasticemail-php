@@ -1,7 +1,9 @@
 <?php
-use Src\BaseRequest;
+namespace Tests\integration\V2\Email;
+
 use Src\V2\Email\EmailRequest;
 use Src\V2\Email\EmailResponse;
+use Tests\TestCase;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
