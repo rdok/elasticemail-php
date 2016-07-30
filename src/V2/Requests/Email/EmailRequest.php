@@ -6,66 +6,45 @@
 
 namespace Src\V2\Requests\Email;
 
-use Src\V2\Email\EmailResponse;
 use Src\V2\Requests\BaseRequest;
 use Src\V2\Requests\Request;
+use Src\V2\Responses\Email\EmailResponse;
 
 class EmailRequest extends BaseRequest implements Request
 {
     /**
-     * @var EmailResponse
-     */
-    protected $response;
-
-    /**
-     * @param array $emailData
-     * @return $this
+     * @param array $emailData to, subject, from keys required.
+     * @return EmailResponse
      */
     public function send(array $emailData)
     {
-        $response = $this->getHttpClient()->request('POST', 'email/send', [
+        $this->handlerRequestValidation($emailData);
+
+        $guzzleResponse = $this->getHttpClient()->request('POST', 'email/send', [
             'form_params' => array_merge($this->config, $emailData),
         ]);
 
-        $this->setResponse(new EmailResponse($response));
-
-        return $this;
+        return new EmailResponse($guzzleResponse);
     }
 
-    /**
-     * @return \GuzzleHttp\Psr7\Response
-     */
-    public function getHttpClient()
+    private function handlerRequestValidation($emailData)
     {
-        // TODO: Implement getHttpClient() method.
-    }
-
-    /**
-     * @return EmailResponse
-     * @throws RequestException
-     */
-    public function getResponse()
-    {
-        if (is_null($this->response)) {
-            throw new RequestException('No previous request has been done.');
+        if (!array_key_exists('to', $emailData)) {
+            throw new RequestException("At least one recipient must be specified. Array key: 'to'");
         }
 
-        return $this->response;
-    }
+        if (!filter_var($emailData['to'], FILTER_VALIDATE_EMAIL)) {
+            throw new RequestException('Invalid recipient email.');
+        }
 
-    /**
-     * @param EmailResponse $response
-     * @return EmailRequest
-     */
-    public function setResponse($response)
-    {
-        $this->response = $response;
+        if (!array_key_exists('subject', $emailData)) {
+            throw new RequestException('Subject field must be specified.');
+        }
 
-        return $this;
-    }
+        if (!array_key_exists('from', $emailData)) {
+            throw new RequestException('Invalid FROM email address.');
+        }
 
-    public function getStatus()
-    {
-        return new GetStatusResponse($this->response->getHttpClient());
+        return true;
     }
 }

@@ -7,29 +7,29 @@
 namespace Src\V2\Requests;
 
 use GuzzleHttp\Client;
-use Src\ElasticEmailV2;
 use Src\V2\Requests\Email\RequestException;
 
 abstract class BaseRequest
 {
+    const BASE_URI_KEY = 'base_uri';
     /**
      * @var Client
      */
     private $httpClient;
     /**
-     * @var string
+     * @var array
      */
-    private $apiKey;
+    protected $config;
 
-    public function __construct(array $config)
+    /**
+     * BaseRequest constructor.
+     * @param $baseUri
+     * @param array $config
+     */
+    public function __construct($baseUri, array $config)
     {
-        $baseUri = array_key_exists(
-            ElasticEmailV2::BASE_URI_KEY, $config) ? $config[ElasticEmailV2::BASE_URI_KEY] : null;
-        $apiKey = array_key_exists(ElasticEmailV2::API_KEY, $config) ? $config[ElasticEmailV2::API_KEY] : null;
-
         $this->setHttpClient($baseUri);
-
-        $this->setApiKey($apiKey);
+        $this->config = $config;
     }
 
     /**
@@ -53,21 +53,5 @@ abstract class BaseRequest
         }
 
         $this->httpClient = new Client(['base_uri' => $baseUri]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getApiKey()
-    {
-        return $this->apiKey;
-    }
-
-    /**
-     * @param string $apiKey
-     */
-    public function setApiKey($apiKey)
-    {
-        $this->apiKey = $apiKey;
     }
 }

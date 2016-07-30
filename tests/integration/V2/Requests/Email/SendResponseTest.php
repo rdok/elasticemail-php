@@ -16,6 +16,7 @@ class SendResponseTest extends TestCase
      */
     public function returns_valid_transaction_id()
     {
+        $this->markTestIncomplete();
         $response = $this->elasticEmail->email()->send($this->emailData);
 
         $this->assertSame(200, $response->getHttpClient()->getStatusCode());

@@ -16,6 +16,8 @@ class GetStatusResponseTest extends TestCase
      */
     public function receive_successful_response_when_getting_email_status()
     {
+        $this->markTestIncomplete();
+        
         $sendEmailResponse = $this->elasticEmail->email()->send($this->emailData);
         $getStatusData = ['transactionID' => $sendEmailResponse->getTransactionId()];
         $getStatusResponse = $this->elasticEmail->email()->getStatus($getStatusData);

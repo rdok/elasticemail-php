@@ -3,8 +3,10 @@
 namespace Tests;
 
 use Dotenv\Dotenv;
+use Faker\Factory;
 use PHPUnit_Framework_TestCase;
 use Src\ElasticEmailV2;
+use Src\V2\Responses\Email\EmailResponse;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
@@ -21,15 +23,18 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * @var array
      */
     protected $emailData;
+    protected $faker;
 
     public function setUp()
     {
         parent::setUp();
 
-        $dotenv = new Dotenv(__DIR__.'/..');
-        $dotenv->load();
+        $dotEnv = new Dotenv(__DIR__.'/..');
+        $dotEnv->load();
 
-        $this->elasticEmail = new ElasticEmailV2(['apikey' => getenv('ELASTIC_EMAIL_API_KEY')]);
+        $this->faker = Factory::create();
+
+        $this->elasticEmail = new ElasticEmailV2(getenv('ELASTIC_EMAIL_API_KEY'));
 
         $this->emailData = [
             'from'      => '***REMOVED***',
@@ -39,5 +44,19 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
             'body_html' => "<p>Body Html</p><hr>",
             'body_text' => 'Body Text',
         ];
+    }
+
+    /**
+     * @return EmailResponse
+     */
+    protected function sendSuccessfulEmail()
+    {
+        $response = $this->elasticEmail->email()->send([
+            'to'      => getenv('SINGLE_TESTER_EMAIL'),
+            'subject' => getenv('EMAIL_SUBJECT'),
+            'from'    => getenv('SINGLE_TESTER_EMAIL')
+        ]);
+
+        return $response;
     }
 }

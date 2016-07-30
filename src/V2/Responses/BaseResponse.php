@@ -4,9 +4,10 @@
  * @since 6/4/16
  */
 
-namespace Src;
+namespace Src\V2\Responses;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Response as Psr7Response;
 
 abstract class BaseResponse
@@ -15,16 +16,18 @@ abstract class BaseResponse
      * @var Client
      */
     protected $httpClient;
-    protected $response;
+    protected $rawContents;
+    private $contents;
 
     public function __construct(Psr7Response $client)
     {
         $this->httpClient = $client;
 
-        $this->response = json_decode($client->getBody()->getContents());
+        $this->rawContents = $client->getBody()->getContents();
+        $this->contents = json_decode($this->rawContents);
 
         if (!$this->wasSuccessful()) {
-            throw new \Exception($this->getErrorMessage());
+            throw new ResponseException($this->getErrorMessage());
         }
     }
 
@@ -35,7 +38,7 @@ abstract class BaseResponse
      */
     public function wasSuccessful()
     {
-        return $this->response->success;
+        return $this->contents->success;
     }
 
     /**
@@ -49,17 +52,7 @@ abstract class BaseResponse
             return null;
         }
 
-        return $this->response->error;
-    }
-
-    /**
-     * Get the HTTP status code.
-     *
-     * @return mixed
-     */
-    public function getHttpClient()
-    {
-        return $this->httpClient;
+        return $this->contents->error;
     }
 
     /**
@@ -69,6 +62,26 @@ abstract class BaseResponse
      */
     public function getData()
     {
-        return 'a';
+        return $this->rawContents;
+    }
+
+    /**
+     * Get the HTTP status code.
+     *
+     * @return Response
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
+
+    public function getTransactionId()
+    {
+        return $this->contents->data->transactionid;
+    }
+
+    public function getMessageId()
+    {
+        return $this->contents->data->messageid;
     }
 }

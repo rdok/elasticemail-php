@@ -7,42 +7,22 @@
 namespace Src;
 
 use Src\Exceptions\ElasticEmailV2Exception;
-use Src\V2\Email\EmailRequest;
+use Src\V2\Requests\Email\EmailRequest;
 
 class ElasticEmailV2
 {
-    const BASE_URI_KEY = 'base_uri';
     const API_KEY = 'apikey';
     protected $baseUrlV2 = 'https://api.elasticemail.com/v2/';
-    /**
-     * @var array
-     */
-    private $config;
-    /**
-     * @var EmailRequest
-     */
+    private $apiKey;
     private $emailRequest;
 
-    public function __construct(array $config)
+    public function __construct($apiKey)
     {
-        $this->setConfig($config);
-    }
-
-    /**
-     * @param array $config
-     * @throws ElasticEmailV2Exception
-     */
-    public function setConfig($config)
-    {
-        if (!array_key_exists(self::BASE_URI_KEY, $config)) {
-            throw new ElasticEmailV2Exception('Missing base uri.');
-        }
-
-        if (!array_key_exists(self::API_KEY, $config)) {
+        if (is_null($apiKey)) {
             throw new ElasticEmailV2Exception('Missing API key.');
         }
 
-        $this->config[self::BASE_URI_KEY] = $this->baseUrlV2;
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -50,10 +30,26 @@ class ElasticEmailV2
      */
     public function email()
     {
-        if (is_null($this->emailRequest)) {
-            $this->emailRequest = new EmailRequest($this->config);
+        if (is_null($this->getEmailRequest())) {
+            $this->setEmailRequest(new EmailRequest($this->baseUrlV2, [self::API_KEY => $this->apiKey]));
         }
 
+        return $this->getEmailRequest();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmailRequest()
+    {
         return $this->emailRequest;
+    }
+
+    /**
+     * @param mixed $emailRequest
+     */
+    public function setEmailRequest($emailRequest)
+    {
+        $this->emailRequest = $emailRequest;
     }
 }

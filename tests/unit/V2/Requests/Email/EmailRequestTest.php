@@ -20,7 +20,7 @@ class EmailRequestTest extends PHPUnit_Framework_TestCase
 
         $this->expectExceptionMessage('Invalid base uri.');
 
-        new EmailRequest([]);
+        new EmailRequest(null, []);
     }
 
     /** @test */
@@ -30,6 +30,6 @@ class EmailRequestTest extends PHPUnit_Framework_TestCase
 
         $this->expectExceptionMessage('Invalid base uri.');
 
-        new EmailRequest([ElasticEmailV2::BASE_URI_KEY => 'invalid']);
+        new EmailRequest('invalid', []);
     }
 }
