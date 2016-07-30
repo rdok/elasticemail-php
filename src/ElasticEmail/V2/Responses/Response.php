@@ -4,7 +4,7 @@
  * @since 6/4/16
  */
 
-namespace Src\V2\Responses;
+namespace ElasticEmail\V2\Responses;
 
 interface Response
 {

@@ -4,11 +4,11 @@
  * @since 6/3/16
  */
 
-namespace Src\V2\Requests\Email;
+namespace ElasticEmail\V2\Requests\Email;
 
-use Src\V2\Requests\BaseRequest;
-use Src\V2\Requests\Request;
-use Src\V2\Responses\Email\EmailResponse;
+use ElasticEmail\V2\Requests\BaseRequest;
+use ElasticEmail\V2\Requests\Request;
+use ElasticEmail\V2\Responses\Email\EmailResponse;
 
 class EmailRequest extends BaseRequest implements Request
 {

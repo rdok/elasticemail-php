@@ -1,6 +1,6 @@
 <?php
-use Src\ElasticEmailV2;
-use Src\Exceptions\ElasticEmailV2Exception;
+use ElasticEmail\ElasticEmailV2;
+use ElasticEmail\Exceptions\ElasticEmailV2Exception;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>

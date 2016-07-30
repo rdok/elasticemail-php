@@ -4,10 +4,10 @@
  * @since 6/4/16
  */
 
-namespace Src\V2\Requests;
+namespace ElasticEmail\V2\Requests;
 
 use GuzzleHttp\Client;
-use Src\V2\Requests\Email\RequestException;
+use ElasticEmail\V2\Requests\Email\RequestException;
 
 abstract class BaseRequest
 {

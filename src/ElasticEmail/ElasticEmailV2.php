@@ -4,10 +4,10 @@
  * @since 6/5/16
  */
 
-namespace Src;
+namespace ElasticEmail;
 
-use Src\Exceptions\ElasticEmailV2Exception;
-use Src\V2\Requests\Email\EmailRequest;
+use ElasticEmail\Exceptions\ElasticEmailV2Exception;
+use ElasticEmail\V2\Requests\Email\EmailRequest;
 
 class ElasticEmailV2
 {

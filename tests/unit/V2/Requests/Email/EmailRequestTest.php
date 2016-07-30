@@ -3,9 +3,9 @@
 namespace Tests\unit\V2\Requests\Email;
 
 use PHPUnit_Framework_TestCase;
-use Src\ElasticEmailV2;
-use Src\V2\Requests\Email\EmailRequest;
-use Src\V2\Requests\Email\RequestException;
+use ElasticEmail\ElasticEmailV2;
+use ElasticEmail\V2\Requests\Email\EmailRequest;
+use ElasticEmail\V2\Requests\Email\RequestException;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>

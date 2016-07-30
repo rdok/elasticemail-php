@@ -1,5 +1,5 @@
 {
-  "name": "rdok/elastic-email",
+  "name": "rdok/elasticemail-php",
   "description": "Integration to the Elastic Email API http://api.elasticemail.com/public/help",
   "license": "MIT",
   "authors": [
@@ -23,13 +23,14 @@
   },
   "autoload": {
     "psr-4": {
-      "Src\\": "src/"
+      "ElasticEmail\\": "src/ElasticEmail/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Src\\": "src/",
+      "ElasticEmail\\": "src/ElasticEmail/",
       "Tests\\": "tests/"
     }
-  }
+  },
+  "minimum-stability": "stable"
 }

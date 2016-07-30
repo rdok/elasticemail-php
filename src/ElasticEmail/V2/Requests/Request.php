@@ -4,7 +4,7 @@
  * @since 6/4/16
  */
 
-namespace Src\V2\Requests;
+namespace ElasticEmail\V2\Requests;
 
 interface Request
 {

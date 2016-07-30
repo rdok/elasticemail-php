@@ -6,8 +6,8 @@
 
 namespace Tests\integration;
 
-use Src\V2\Requests\Email\RequestException;
-use Src\V2\Responses\Email\EmailResponse;
+use ElasticEmail\V2\Requests\Email\RequestException;
+use ElasticEmail\V2\Responses\Email\EmailResponse;
 use Tests\TestCase;
 
 class ElasticEmailV2Test extends TestCase

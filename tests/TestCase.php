@@ -3,10 +3,10 @@
 namespace Tests;
 
 use Dotenv\Dotenv;
+use ElasticEmail\ElasticEmailV2;
+use ElasticEmail\V2\Responses\Email\EmailResponse;
 use Faker\Factory;
 use PHPUnit_Framework_TestCase;
-use Src\ElasticEmailV2;
-use Src\V2\Responses\Email\EmailResponse;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
@@ -31,9 +31,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
 
         $dotEnv = new Dotenv(__DIR__.'/..');
         $dotEnv->load();
-
         $this->faker = Factory::create();
-
         $this->elasticEmail = new ElasticEmailV2(getenv('ELASTIC_EMAIL_API_KEY'));
 
         $this->emailData = [
