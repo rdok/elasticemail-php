@@ -1,5 +1,7 @@
 # ElasticEmailPHP 
-[![Build Status](https://travis-ci.org/rdok/elasticemail-php.svg?branch=master)](https://travis-ci.org/rdok/elasticemail-php)  
+[![Build Status](https://travis-ci.org/rdok/elasticemail-php.svg?branch=master)](https://travis-ci.org/rdok/elasticemail-php)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/386386ba-fbe5-4a50-a51c-07bfd7b3617f/mini.png)](https://insight.sensiolabs.com/projects/386386ba-fbe5-4a50-a51c-07bfd7b3617f)
+[![StyleCI](https://styleci.io/repos/60220382/shield)](https://styleci.io/repos/60220382)
   
 ElasticEmailPHP is a PHP Library for interacting with [Elastic Email platform API](http://api.elasticemail.com/public/help).
 
