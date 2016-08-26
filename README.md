@@ -21,7 +21,6 @@ composer require rdok/elasticemail-php
 ```
 
 ## TODO *(order of priority)*
-- Set up packagist
 - Set up integration server
 - Send mass emails
 
