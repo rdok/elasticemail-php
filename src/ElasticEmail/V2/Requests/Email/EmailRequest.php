@@ -7,10 +7,10 @@
 namespace ElasticEmail\V2\Requests\Email;
 
 use ElasticEmail\V2\Requests\BaseRequest;
-use ElasticEmail\V2\Requests\Request;
+use ElasticEmail\V2\Requests\RequestInterface;
 use ElasticEmail\V2\Responses\Email\EmailResponse;
 
-class EmailRequest extends BaseRequest implements Request
+class EmailRequest extends BaseRequest implements RequestInterface
 {
     /**
      * @param array $emailData to, subject, from keys required.

@@ -6,20 +6,20 @@
 
 namespace ElasticEmail\V2\Requests;
 
-use GuzzleHttp\Client;
 use ElasticEmail\V2\Requests\Email\RequestException;
+use GuzzleHttp\Client;
 
 abstract class BaseRequest
 {
     const BASE_URI_KEY = 'base_uri';
     /**
-     * @var Client
-     */
-    private $httpClient;
-    /**
      * @var array
      */
     protected $config;
+    /**
+     * @var Client
+     */
+    private $httpClient;
 
     /**
      * BaseRequest constructor.

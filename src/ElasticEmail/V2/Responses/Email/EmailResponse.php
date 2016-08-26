@@ -7,8 +7,8 @@
 namespace ElasticEmail\V2\Responses\Email;
 
 use ElasticEmail\V2\Responses\BaseResponse;
-use ElasticEmail\V2\Responses\Response;
+use ElasticEmail\V2\Responses\ResponseInterface;
 
-class EmailResponse extends BaseResponse implements Response
+class EmailResponse extends BaseResponse implements ResponseInterface
 {
 }

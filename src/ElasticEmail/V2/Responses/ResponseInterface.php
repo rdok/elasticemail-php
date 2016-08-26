@@ -6,7 +6,7 @@
 
 namespace ElasticEmail\V2\Responses;
 
-interface Response
+interface ResponseInterface
 {
     /**
      * @return \GuzzleHttp\Psr7\Response
