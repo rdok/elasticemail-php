@@ -8,5 +8,4 @@ namespace ElasticEmail\Exceptions;
 
 class ElasticEmailV2Exception extends \Exception
 {
-
 }

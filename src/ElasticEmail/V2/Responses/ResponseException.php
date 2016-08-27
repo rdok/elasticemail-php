@@ -8,5 +8,4 @@ namespace ElasticEmail\V2\Responses;
 
 class ResponseException extends \Exception
 {
-
 }
