@@ -26,13 +26,7 @@ class ElasticEmailV2Test extends TestCase
 
         $this->assertNull($response->getErrorMessage());
 
-        $this->assertRegExp('/[0-9]+[a-z]+[A-Z]+/', $response->getData());
-        $this->assertRegExp('/transactionid/', $response->getData());
-        $this->assertRegExp('/messageid/', $response->getData());
-
-        $this->assertRegExp('/^[0-9a-z-]+$/', $response->getTransactionId());
-
-        $this->assertRegExp('/^[0-9a-zA-Z]+$/', $response->getMessageId());
+        $this->assertRegExp('/{"success":true,"data":{"transactionid":"/', $response->getData());
     }
 
 
