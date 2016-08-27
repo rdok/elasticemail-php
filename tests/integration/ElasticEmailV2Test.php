@@ -12,6 +12,20 @@ use Tests\TestCase;
 
 class ElasticEmailV2Test extends TestCase
 {
+    /** @test */
+    public function see_email_parameters_before_sending_it()
+    {
+        $email = $this->elasticEmail->email([
+            'to'      => $this->getRecipientEmail(),
+            'subject' => $this->getSubjectEmail(),
+            'from'    => $this->getSenderEmail()
+        ]);
+
+        $this->assertEquals($email->getRecipientEmail(), $this->getRecipientEmail());
+        $this->assertEquals($email->getSenderEmail(), $this->getSenderEmail());
+        $this->assertEquals($email->getSubjectEmail(), $this->getSubjectEmail());
+    }
+
     /**
      * @test
      * @vcr sends_a_successful_email.yml
@@ -36,7 +50,8 @@ class ElasticEmailV2Test extends TestCase
      */
     public function throws_exception_if_no_recipient_is_set()
     {
-        $this->setExpectedException(RequestException::class, "At least one recipient must be specified. Array key: 'to'");
+        $this->setExpectedException(RequestException::class,
+            "At least one recipient must be specified. Array key: 'to'");
 
         $this->elasticEmail->email()->send([]);
     }

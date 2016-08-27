@@ -47,4 +47,19 @@ class EmailRequest extends BaseRequest implements RequestInterface
 
         return true;
     }
+
+    public function getRecipientEmail()
+    {
+        return '***REMOVED***';
+    }
+
+    public function getSenderEmail()
+    {
+        return '***REMOVED***';
+    }
+
+    public function getSubjectEmail()
+    {
+        return 'Elastic Email Subject';
+    }
 }

@@ -5,7 +5,6 @@ namespace Tests;
 use Dotenv\Dotenv;
 use ElasticEmail\ElasticEmailV2;
 use ElasticEmail\V2\Responses\Email\EmailResponse;
-use Faker\Factory;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -23,7 +22,6 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * @var array
      */
     protected $emailData;
-    protected $faker;
 
     public function setUp()
     {
@@ -34,17 +32,31 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
             $dotEnv->load();
         }
 
-        $this->faker = Factory::create();
         $this->elasticEmail = new ElasticEmailV2(getenv('ELASTIC_EMAIL_API_KEY'));
 
         $this->emailData = [
-            'from'      => '***REMOVED***',
-            'from_name' => 'From Name',
-            'to'        => '***REMOVED***',
-            'subject'   => 'Subject',
+            'from'      => $this->getSenderEmail(),
+            'from_name' => 'John Shepard',
+            'to'        => $this->getRecipientEmail(),
+            'subject'   => $this->getSubjectEmail(),
             'body_html' => "<p>Body Html</p><hr>",
             'body_text' => 'Body Text',
         ];
+    }
+
+    protected function getSenderEmail()
+    {
+        return getenv('SINGLE_TESTER_EMAIL');
+    }
+
+    protected function getRecipientEmail()
+    {
+        return getenv('SINGLE_TESTER_EMAIL');
+    }
+
+    protected function getSubjectEmail()
+    {
+        return getenv('EMAIL_SUBJECT');
     }
 
     /**
@@ -53,9 +65,9 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     protected function sendSuccessfulEmail()
     {
         $response = $this->elasticEmail->email()->send([
-            'to'      => getenv('SINGLE_TESTER_EMAIL'),
-            'subject' => getenv('EMAIL_SUBJECT'),
-            'from'    => getenv('SINGLE_TESTER_EMAIL')
+            'to'      => $this->getRecipientEmail(),
+            'subject' => $this->getSubjectEmail(),
+            'from'    => $this->getRecipientEmail()
         ]);
 
         return $response;

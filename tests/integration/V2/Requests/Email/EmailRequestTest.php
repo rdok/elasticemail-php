@@ -22,18 +22,18 @@ class EmailRequestTest extends TestCase
         $this->assertNotNull($response->getData());
     }
 
-    /**
-     * @test
-     * @vcr transaction_id_is_different_on_each_email_send.yml
-     */
-    public function transaction_id_is_different_on_each_email_send()
-    {
-        $response = $this->sendSuccessfulEmail();
-
-        $secondResponse = $this->sendSuccessfulEmail();
-
-//        $this->assertNotEquals($response-, $secondResponse);
-    }
+//    /**
+//     * @test
+//     * @vcr transaction_id_is_different_on_each_email_send.yml
+//     */
+//    public function transaction_id_is_different_on_each_email_send()
+//    {
+//        $response = $this->sendSuccessfulEmail();
+//
+//        $secondResponse = $this->sendSuccessfulEmail();
+//
+//        $this->assertNotEquals($response->getTransactionId(), $secondResponse->getTransactionId());
+//    }
 
 //    /**
 //     * @test
