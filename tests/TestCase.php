@@ -29,8 +29,11 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $dotEnv = new Dotenv(__DIR__.'/..');
-        $dotEnv->load();
+        if (getenv('APP_ENV') !== 'travis-ci') {
+            $dotEnv = new Dotenv(__DIR__.'/..');
+            $dotEnv->load();
+        }
+
         $this->faker = Factory::create();
         $this->elasticEmail = new ElasticEmailV2(getenv('ELASTIC_EMAIL_API_KEY'));
 
