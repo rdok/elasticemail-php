@@ -15,7 +15,7 @@ class SendResponseTest extends TestCase
     {
         $this->markTestIncomplete();
 
-        $this->loadVcr('returns_valid_transaction_id.yml');
+        $this->loadVcr(__FUNCTION__);
 
         $response = $this->elasticEmail->email()->send($this->emailData);
 

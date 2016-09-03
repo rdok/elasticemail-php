@@ -15,7 +15,7 @@ class GetStatusResponseTest extends TestCase
     {
         $this->markTestIncomplete();
 
-        $this->loadVcr('receive_successful_response_when_getting_email_status.yml');
+        $this->loadVcr(__FUNCTION__);
 
         $sendEmailResponse = $this->elasticEmail->email()->send($this->emailData);
         $getStatusData = ['transactionID' => $sendEmailResponse->getTransactionId()];

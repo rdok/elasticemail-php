@@ -52,6 +52,8 @@ abstract class BaseRequest
             throw new RequestException('Invalid base uri.');
         }
 
-        $this->httpClient = new Client(['base_uri' => $baseUri]);
+        $options['base_uri'] = $baseUri;
+
+        $this->httpClient = new Client($options);
     }
 }
