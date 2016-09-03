@@ -9,12 +9,11 @@ use Tests\TestCase;
  */
 class EmailRequestTest extends TestCase
 {
-    /**
-     * @test
-     * @vcr data_can_be_used_multiple_times.yml
-     */
+    /** @test */
     public function data_can_be_used_multiple_times()
     {
+        $this->loadVcr('data_can_be_used_multiple_times.yml');
+
         $response = $this->sendSuccessfulEmail();
 
         $this->assertNotNull($response->getData());
@@ -22,12 +21,11 @@ class EmailRequestTest extends TestCase
         $this->assertNotNull($response->getData());
     }
 
-    /**
-     * @test
-     * @vcr transaction_id_is_different_on_each_email_send.yml
-     */
+    /** @test */
     public function transaction_id_is_different_on_each_email_send()
     {
+        $this->loadVcr('transaction_id_is_different_on_each_email_send.yml');
+
         $response = $this->sendSuccessfulEmail();
 
         $secondResponse = $this->sendSuccessfulEmail();
@@ -41,6 +39,7 @@ class EmailRequestTest extends TestCase
 //     */
 //    public function email_send_request_is_initialized_successfully()
 //    {
+//          $this->loadVcr('email_send_request_is_initialized_successfully.yml');
 //        $emailResponse = $this->elasticEmail->email()->send($this->emailData);
 //
 //        $this->assertInstanceOf(EmailResponse::class, $emailResponse);

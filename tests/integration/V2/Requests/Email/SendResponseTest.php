@@ -10,13 +10,13 @@ use Tests\TestCase;
  */
 class SendResponseTest extends TestCase
 {
-    /**
-     * @test
-     * @vcr integration.email.send.response.valid_transaction_id.yml
-     */
+    /** @test */
     public function returns_valid_transaction_id()
     {
         $this->markTestIncomplete();
+
+        $this->loadVcr('returns_valid_transaction_id.yml');
+
         $response = $this->elasticEmail->email()->send($this->emailData);
 
         $this->assertSame(200, $response->getHttpClient()->getStatusCode());
