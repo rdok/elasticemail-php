@@ -12,11 +12,12 @@ use Tests\TestCase;
 
 class ElasticEmailV2Test extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     * @vcr sends_a_successful_email
+     */
     public function sends_a_successful_email()
     {
-        $this->loadVcr(__FUNCTION__);
-
         $response = $this->sendSuccessfulEmail();
 
         $this->assertInstanceOf(EmailResponse::class, $response);

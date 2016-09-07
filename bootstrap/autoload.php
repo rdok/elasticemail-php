@@ -10,5 +10,3 @@
 |--------------------------------------------------------------------------
 */
 require __DIR__.'/../vendor/autoload.php';
-
-\VCR\VCR::configure()->setStorage('json');
