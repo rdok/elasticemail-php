@@ -10,14 +10,13 @@ use Tests\TestCase;
  */
 class GetStatusResponseTest extends TestCase
 {
-    /**
-     * @test
-     * @vcr integration.email.response.getStatus.yml
-     */
+    /** @test */
     public function receive_successful_response_when_getting_email_status()
     {
         $this->markTestIncomplete();
-        
+
+        $this->loadVcr(__FUNCTION__);
+
         $sendEmailResponse = $this->elasticEmail->email()->send($this->emailData);
         $getStatusData = ['transactionID' => $sendEmailResponse->getTransactionId()];
         $getStatusResponse = $this->elasticEmail->email()->getStatus($getStatusData);
