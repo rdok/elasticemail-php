@@ -14,7 +14,7 @@ class ElasticEmailV2Test extends TestCase
 {
     /**
      * @test
-     * @vcr sends_a_successful_email
+     * @vcr sends_a_successful_email.yml
      */
     public function sends_a_successful_email()
     {

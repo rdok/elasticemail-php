@@ -30,8 +30,6 @@ class EmailRequestTest extends TestCase
     {
         $response = $this->sendSuccessfulEmail();
 
-        $secondResponse = $this->sendSuccessfulEmail();
-
 //        $this->assertNotEquals($response-, $secondResponse);
     }
 

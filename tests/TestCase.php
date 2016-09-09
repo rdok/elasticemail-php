@@ -34,16 +34,12 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * @var string
      */
     protected $casseteName;
-    /**
-     * @var string
-     */
-    protected $env;
 
     public function setUp()
     {
         parent::setUp();
 
-        if ($this->env !== self::INTEGRATION_SERVER) {
+        if ($this->getAppEnv() !== self::INTEGRATION_SERVER) {
             $dotEnv = new Dotenv(__DIR__.'/..');
             $dotEnv->load();
         }
@@ -79,5 +75,10 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     protected function getSubjectEmail()
     {
         return getenv('EMAIL_SUBJECT');
+    }
+
+    protected function getAppEnv()
+    {
+        return getenv('APP_ENV');
     }
 }
