@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Dotenv\Dotenv;
 use ElasticEmail\ElasticEmailV2;
 use ElasticEmail\V2\Responses\Email\EmailResponse;
 use Faker\Factory;
@@ -61,8 +62,6 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      */
     protected function sendSuccessfulEmail()
     {
-        var_dump($this->getRecipientEmail());
-
         $response = $this->elasticEmail->email()->send([
             'to'      => $this->getRecipientEmail(),
             'subject' => $this->getSubjectEmail(),

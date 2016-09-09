@@ -9,11 +9,12 @@ use Tests\TestCase;
  */
 class EmailRequestTest extends TestCase
 {
-    /** @test */
+    /**
+     * @test
+     * @vcr data_can_be_used_multiple_times.yml
+     */
     public function data_can_be_used_multiple_times()
     {
-        $this->loadVcr(__FUNCTION__);
-
         $response = $this->sendSuccessfulEmail();
 
         $this->assertNotNull($response->getData());
@@ -21,11 +22,12 @@ class EmailRequestTest extends TestCase
         $this->assertNotNull($response->getData());
     }
 
-    /** @test */
+    /**
+     * @test
+     * @vcr transaction_id_is_different_on_each_email_send.yml
+     */
     public function transaction_id_is_different_on_each_email_send()
     {
-        $this->loadVcr(__FUNCTION__);
-
         $response = $this->sendSuccessfulEmail();
 
         $secondResponse = $this->sendSuccessfulEmail();

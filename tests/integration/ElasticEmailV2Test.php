@@ -30,11 +30,12 @@ class ElasticEmailV2Test extends TestCase
     }
 
 
-    /** @test */
+    /**
+     * @test
+     * @vcr throws_exception_if_no_recipient_is_set.yml
+     */
     public function throws_exception_if_no_recipient_is_set()
     {
-        $this->loadVcr(__FUNCTION__);
-
         $this->setExpectedException(RequestException::class,
             "At least one recipient must be specified. Array key: 'to'");
 
@@ -45,11 +46,10 @@ class ElasticEmailV2Test extends TestCase
      * @test
      * @dataProvider invalidEmailsProvider
      * @param $invalidEmail
+     * @vcr throws_exception_if_no_recipient_email_is_invalid.yml
      */
     public function throws_exception_if_no_recipient_email_is_invalid($invalidEmail)
     {
-        $this->loadVcr(__FUNCTION__);
-
         $this->setExpectedException(RequestException::class, 'Invalid recipient email.');
 
         $this->elasticEmail->email()->send(['to' => $invalidEmail]);
@@ -64,21 +64,23 @@ class ElasticEmailV2Test extends TestCase
         ];
     }
 
-    /** @test */
+    /**
+     * @test
+     * @vcr throws_exception_if_no_subject_is_specified.yml
+     */
     public function throws_exception_if_no_subject_is_specified()
     {
-        $this->loadVcr(__FUNCTION__);
-
         $this->setExpectedException(RequestException::class, 'Subject field must be specified.');
 
         $this->elasticEmail->email()->send(['to' => getenv('SINGLE_TESTER_EMAIL')]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @vcr throws_exception_if_no_send_email_is_specified.yml
+     */
     public function throws_exception_if_no_send_email_is_specified()
     {
-        $this->loadVcr('throws_exception_if_no_send_email_is_specified');
-
         $this->setExpectedException(RequestException::class, 'Invalid FROM email address.');
 
         $this->elasticEmail->email()->send([
