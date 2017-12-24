@@ -7,10 +7,21 @@
 namespace Tests;
 
 use ElasticEmail\Email;
+use ElasticEmail\Email\Send;
 use GuzzleHttp\Client;
+use Tests\unit\UnitTestCase;
 
 class EmailTest extends UnitTestCase
 {
+    /** @test */
+    public function has_access_to_send_client()
+    {
+        $email = new Email(new Client('api-key'));
+
+        $this->assertInstanceOf(Send::class, $email->send());
+    }
+
+
     /** @test */
     public function behaviour_for_sending_emails_is_used_correctly()
     {

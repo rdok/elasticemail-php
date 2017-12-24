@@ -10,12 +10,12 @@ namespace ElasticEmail;
 class ElasticEmail
 {
 
-    /** @var Client */
+    /** @var ElasticEmailClient */
     private $client;
 
     public function __construct($apiKey)
     {
-        $this->client = new Client($apiKey);
+        $this->client = new ElasticEmailClient($apiKey);
     }
 
     /** @return Email */

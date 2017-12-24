@@ -1,14 +1,14 @@
 <?php
+
+namespace ElasticEmail\Email;
+
+use ElasticEmail\ElasticEmailClient;
+
 /**
  * @author  Rizart Dokollari <***REMOVED***>
  * @since   12/24/17
  */
-
-namespace ElasticEmail;
-
-use ElasticEmail\Email\Send;
-
-class Email
+class Send
 {
     /** @var ElasticEmailClient */
     private $client;
@@ -18,8 +18,13 @@ class Email
         $this->client = $client;
     }
 
-    public function send()
+    public function handle()
     {
-        return new Send($this->client);
+        $this->response = $this->client->request(
+            'POST',
+            'email/send'
+        );
+
+        return $this;
     }
 }

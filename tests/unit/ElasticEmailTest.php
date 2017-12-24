@@ -4,6 +4,7 @@ namespace Tests;
 
 use ElasticEmail\ElasticEmail;
 use ElasticEmail\Email;
+use Tests\unit\UnitTestCase;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
