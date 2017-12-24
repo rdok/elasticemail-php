@@ -6,21 +6,38 @@
 
 namespace Tests\unit;
 
-class ClientTest extends TestCase
+use ElasticEmail\Client;
+use ElasticEmail\ElasticEmailException;
+use GuzzleHttp\Psr7\Uri;
+
+class ClientTest extends UnitTestCase
 {
     /** @test */
-    public function throws_email_request_exception_if_base_uri_is_missing()
+    public function uses_correct_api_base_uri()
     {
-        $this->setExpectedException(RequestException::class, 'Invalid base uri.');
+        $client = new Client('api-key');
 
-        new EmailRequest(null, []);
+        $expectedBaseUri = Client::$baseUri;
+
+        /** @var Uri $actualBaseUri */
+        $actualBaseUri = (string)$client->getConfig('base_uri');
+
+        $this->assertEquals($expectedBaseUri, $actualBaseUri);
     }
 
     /** @test */
-    public function throws_email_request_exception_if_base_uri_is_invalid()
+    public function appends_api_key()
     {
-        $this->setExpectedException(RequestException::class, 'Invalid base uri.');
 
-        new EmailRequest('invalid', []);
+    }
+
+    /** @test */
+    public function throws_missing_api_key_exception()
+    {
+        $this->expectException(ElasticEmailException::class);
+
+        $this->expectExceptionMessage('ElasticEmail API key is missing.');
+
+        new Client(null);
     }
 }
