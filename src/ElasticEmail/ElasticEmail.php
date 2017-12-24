@@ -12,12 +12,12 @@ use ElasticEmail\Email\Email;
 class ElasticEmail
 {
 
-    /** @var ElasticEmailClient */
+    /** @var Client */
     private $client;
 
     public function __construct($apiKey)
     {
-        $this->client = new ElasticEmailClient($apiKey);
+        $this->client = new Client($apiKey);
     }
 
     /** @return Email */

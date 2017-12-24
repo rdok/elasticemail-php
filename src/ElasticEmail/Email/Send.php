@@ -2,8 +2,8 @@
 
 namespace ElasticEmail\Email;
 
-use ElasticEmail\ElasticEmailClient;
-use ElasticEmail\ElasticEmailHelpers;
+use ElasticEmail\Client;
+use ElasticEmail\ClientHelpers;
 
 /**
  * @author  Rizart Dokollari <***REMOVED***>
@@ -13,21 +13,41 @@ use ElasticEmail\ElasticEmailHelpers;
 class Send
 {
     const URI = 'email/send';
-    use ElasticEmailHelpers;
 
-    /** @var ElasticEmailClient */
+    use ClientHelpers;
+
+    /** @var Client */
     private $client;
 
-    public function __construct(ElasticEmailClient $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    public function handle(array $params = [])
+    public function handle(array $params = [], $muiltipartOption = false)
     {
-        $this->response = $this->client
-            ->request('POST', self::URI, ['body' => json_encode($params)]);
+        $options = $this->transform($params, $muiltipartOption);
+
+        $this->response = $this->client->request('POST', self::URI, $options);
 
         return $this;
+    }
+
+    protected function transform(array $params, $muiltipartOption)
+    {
+        if ( ! $muiltipartOption) {
+            return ['form_params' => $params];
+        }
+
+        $multipart = [];
+
+        foreach ($params as $key => $value) {
+            $multipart[] = [
+                'name'     => $key,
+                'contents' => $value
+            ];
+        }
+
+        return ['multipart' => $multipart];
     }
 }

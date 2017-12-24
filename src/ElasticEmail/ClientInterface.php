@@ -7,8 +7,8 @@
 namespace ElasticEmail\ElasticEmail;
 
 
-interface ElasticEmailClientInterface
+interface ClientInterface
 {
-    /** @return ElasticEmailClientInterface */
+    /** @return ClientInterface */
     public function handle(array $params = []);
 }

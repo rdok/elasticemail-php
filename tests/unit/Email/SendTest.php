@@ -6,7 +6,7 @@
 
 namespace tests\unit\Email;
 
-use ElasticEmail\ElasticEmailClient;
+use ElasticEmail\Client;
 use ElasticEmail\Email\Send;
 use Tests\unit\UnitTestCase;
 
@@ -21,7 +21,7 @@ class SendTest extends UnitTestCase
     /** @test */
     public function forward_params_as_http_query()
     {
-        $client = $this->getMockBuilder(ElasticEmailClient::class)
+        $client = $this->getMockBuilder(Client::class)
             ->setConstructorArgs(['api-key'])
             ->getMock();
 
@@ -33,10 +33,37 @@ class SendTest extends UnitTestCase
             ->method('request')
             ->with('POST', Send::URI, $expectedParams);
 
-        /** @var ElasticEmailClient $client */
+        /** @var Client $client */
 
         $send = new Send($client);
 
         $send->handle($params);
+    }
+
+    /** @test */
+    public function use_multipart_option_to_send_files()
+    {
+        $client = $this->getMockBuilder(Client::class)
+            ->setConstructorArgs(['api-key'])
+            ->getMock();
+
+        $params = [$name = 'any-parameter' => $content = 'any-parameter-value'];
+
+        $expectedParams = ['multipart' => [
+            [
+                'name'     => $name,
+                'contents' => $content
+            ]
+        ]];
+
+        $client->expects($this->once())
+            ->method('request')
+            ->with('POST', Send::URI, $expectedParams);
+
+        /** @var Client $client */
+
+        $send = new Send($client);
+
+        $send->handle($params, true);
     }
 }

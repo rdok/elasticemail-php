@@ -6,21 +6,21 @@
 
 namespace Tests\unit;
 
-use ElasticEmail\ElasticEmailClient;
+use ElasticEmail\Client;
 use ElasticEmail\ElasticEmailException;
 
-class ElasticEmailClientTest extends UnitTestCase
+class ClientTest extends UnitTestCase
 {
     const API_KEY = 'api-key';
 
-    /** @var  ElasticEmailClient */
+    /** @var  Client */
     private $client;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->client = new ElasticEmailClient(self::API_KEY);
+        $this->client = new Client(self::API_KEY);
     }
 
     /** @test */
@@ -28,7 +28,7 @@ class ElasticEmailClientTest extends UnitTestCase
     {
         $actualBaseUri = (string)$this->client->getConfig('base_uri');
 
-        $this->assertEquals(ElasticEmailClient::$baseUri, $actualBaseUri);
+        $this->assertEquals(Client::$baseUri, $actualBaseUri);
     }
 
     /** @test */
@@ -38,6 +38,6 @@ class ElasticEmailClientTest extends UnitTestCase
 
         $this->expectExceptionMessage('ElasticEmail API key is missing.');
 
-        new ElasticEmailClient(null);
+        new Client(null);
     }
 }

@@ -6,7 +6,7 @@
 
 namespace ElasticEmail\Email;
 
-use ElasticEmail\ElasticEmailClient;
+use ElasticEmail\Client;
 
 /**
  * Access to Email API end points.
@@ -14,16 +14,18 @@ use ElasticEmail\ElasticEmailClient;
  */
 class Email
 {
-    /** @var ElasticEmailClient */
+    /** @var Client */
     private $client;
 
-    public function __construct(ElasticEmailClient $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    public function send()
+    public function send(array $params = [])
     {
-        return new Send($this->client);
+        $send = new Send($this->client);
+
+        return $send->handle($params);
     }
 }

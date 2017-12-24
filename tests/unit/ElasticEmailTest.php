@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests;
+namespace Tests\unit;
 
 use ElasticEmail\ElasticEmail;
 use ElasticEmail\Email\Email;
-use Tests\unit\UnitTestCase;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>

@@ -10,10 +10,11 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 
 /** HTTP client: sets correct base URI & api key. */
-class ElasticEmailClient extends \GuzzleHttp\Client
+class Client extends \GuzzleHttp\Client
 {
     static $baseUri = 'https://api.elasticemail.com/v2/';
 
@@ -29,7 +30,7 @@ class ElasticEmailClient extends \GuzzleHttp\Client
         ]);
     }
 
-    public function handler($apikey, array $middlewares = [])
+    public function handler($apikey, array $externalMiddlewares = [])
     {
         $stack = HandlerStack::create();
 
@@ -45,7 +46,20 @@ class ElasticEmailClient extends \GuzzleHttp\Client
             )
         );
 
-        foreach ($middlewares as $middleware) {
+        $stack->push(Middleware::mapResponse(
+            function (ResponseInterface $response) {
+
+                $body = json_decode((string)$response->getBody(), true);
+
+                if ( ! $body['success']) {
+                    throw new ElasticEmailException($body['error']);
+                }
+
+                return $response;
+            }
+        ));
+
+        foreach ($externalMiddlewares as $middleware) {
             $stack->push($middleware);
         }
 

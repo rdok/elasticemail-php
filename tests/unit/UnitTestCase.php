@@ -6,8 +6,8 @@
 
 namespace Tests\unit;
 
-use ElasticEmail\ElasticEmail\ElasticEmailClientInterface;
-use ElasticEmail\ElasticEmailClient;
+use ElasticEmail\ElasticEmail\ClientInterface;
+use ElasticEmail\Client;
 use GuzzleHttp\Middleware;
 use Tests\TestCase;
 
@@ -18,9 +18,9 @@ abstract class UnitTestCase extends TestCase
         $container = [];
         $history = Middleware::history($container);
 
-        $client = new ElasticEmailClient($apiKey = 'api-key', [$history]);
+        $client = new Client($apiKey = 'api-key', [$history]);
 
-        /** @var ElasticEmailClientInterface $send */
+        /** @var ClientInterface $send */
         $send = new $apiEndPointClient($client);
 
         $send->handle();
