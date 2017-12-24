@@ -9,18 +9,17 @@
     }
   ],
   "require": {
-    "php": ">=5.5.9"
+    "guzzlehttp/guzzle": "^6.3"
   },
   "require-dev": {
-    "phpunit/phpunit": "4.8.*",
-    "whatthejeff/nyancat-phpunit-resultprinter": "^1.2",
     "vlucas/phpdotenv": "^2.2",
     "fzaninotto/Faker": "^1.6",
     "php-vcr/php-vcr": "^1.2",
     "fzaninotto/faker": "^1.6",
     "satooshi/php-coveralls": "^1.0",
-    "guzzlehttp/guzzle": "^6.2",
-    "php-vcr/phpunit-testlistener-vcr": "^1.1"
+    "php-vcr/phpunit-testlistener-vcr": "^1.1",
+    "laravel/homestead": "v6.6.0",
+    "phpunit/phpunit": "^6.5"
   },
   "autoload": {
     "psr-4": {
@@ -29,9 +28,11 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "ElasticEmail\\": "src/ElasticEmail/",
       "Tests\\": "tests/"
-    }
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "minimum-stability": "stable"
 }

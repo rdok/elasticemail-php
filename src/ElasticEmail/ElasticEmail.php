@@ -6,10 +6,9 @@
 
 namespace ElasticEmail;
 
-use ElasticEmail\Exceptions\ElasticEmailV2Exception;
 use ElasticEmail\V2\Requests\Email\EmailRequest;
 
-class ElasticEmailV2
+class ElasticEmail
 {
     const API_KEY = 'apikey';
     protected $baseUrlV2 = 'https://api.elasticemail.com/v2/';
@@ -19,19 +18,25 @@ class ElasticEmailV2
     public function __construct($apiKey)
     {
         if (is_null($apiKey)) {
-            throw new ElasticEmailV2Exception('Missing API key.');
+            throw new ElasticEmailException('ElasticEmail API key is missing.');
         }
 
         $this->apiKey = $apiKey;
     }
 
-    /**
-     * @return EmailRequest
-     */
+    /** @return Email */
     public function email()
     {
+        return new Email;
+
         if (is_null($this->getEmailRequest())) {
-            $this->setEmailRequest(new EmailRequest($this->baseUrlV2, [self::API_KEY => $this->apiKey]));
+
+            $emailRequest = new EmailRequest(
+                $this->baseUrlV2,
+                [self::API_KEY => $this->apiKey]
+            );
+
+            $this->setEmailRequest($emailRequest);
         }
 
         return $this->getEmailRequest();

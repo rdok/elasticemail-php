@@ -2,50 +2,42 @@
 
 namespace Tests;
 
-use Dotenv\Dotenv;
-use ElasticEmail\ElasticEmailV2;
+use ElasticEmail\ElasticEmail;
 use ElasticEmail\V2\Responses\Email\EmailResponse;
 use Faker\Factory;
-use PHPUnit_Framework_TestCase;
 
 /**
  * @author Rizart Dokollari <***REMOVED***>
  * @since 6/5/16
  */
-abstract class TestCase extends PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     const APP_ENV = 'APP_ENV';
-    const ELASTIC_EMAIL_API_KEY = 'ELASTIC_EMAIL_API_KEY';
+    const API_KEY = 'ELASTIC_EMAIL_API_KEY';
     const INTEGRATION_SERVER = 'integration_server';
-    /**
-     * @var ElasticEmailV2
-     */
+
+    /** @var  ElasticEmail */
     protected $elasticEmail;
 
-    /**
-     * @var array
-     */
+    /** @var  array */
     protected $emailData;
-    /**
-     * @var Factory
-     */
+
+    /** @var  Factory */
     protected $faker;
-    /**
-     * @var string
-     */
+
+    /** @var  string */
     protected $casseteName;
 
     public function setUp()
     {
         parent::setUp();
 
-        if ($this->getAppEnv() !== self::INTEGRATION_SERVER) {
-            $dotEnv = new Dotenv(__DIR__.'/..');
-            $dotEnv->load();
-        }
+        $this->elasticEmail = new ElasticEmail(getenv(self::API_KEY));
+    }
 
-        $this->faker = Factory::create();
-        $this->elasticEmail = new ElasticEmailV2(getenv(self::ELASTIC_EMAIL_API_KEY));
+    protected function getAppEnv()
+    {
+        return getenv('APP_ENV');
     }
 
     protected function getSenderEmail()
@@ -53,9 +45,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
         return getenv('SINGLE_TESTER_EMAIL');
     }
 
-    /**
-     * @return EmailResponse
-     */
+    /** @return EmailResponse */
     protected function sendSuccessfulEmail()
     {
         $response = $this->elasticEmail->email()->send([
@@ -75,10 +65,5 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     protected function getSubjectEmail()
     {
         return getenv('EMAIL_SUBJECT');
-    }
-
-    protected function getAppEnv()
-    {
-        return getenv('APP_ENV');
     }
 }

@@ -1,16 +1,12 @@
 <?php
-
-namespace Tests\unit\V2\Requests\Email;
-
-use ElasticEmail\V2\Requests\Email\EmailRequest;
-use ElasticEmail\V2\Requests\Email\RequestException;
-use PHPUnit_Framework_TestCase;
-
 /**
- * @author Rizart Dokollari <***REMOVED***>
- * @since 7/30/16
+ * @author  Rizart Dokollari <***REMOVED***>
+ * @since   12/24/17
  */
-class EmailRequestTest extends PHPUnit_Framework_TestCase
+
+namespace Tests\unit;
+
+class ClientTest extends TestCase
 {
     /** @test */
     public function throws_email_request_exception_if_base_uri_is_missing()
