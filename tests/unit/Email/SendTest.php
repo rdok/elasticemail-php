@@ -8,8 +8,6 @@ namespace tests\unit\Email;
 
 use ElasticEmail\ElasticEmailClient;
 use ElasticEmail\Email\Send;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Request;
 use Tests\unit\UnitTestCase;
 
 class SendTest extends UnitTestCase
@@ -17,21 +15,28 @@ class SendTest extends UnitTestCase
     /** @test */
     public function appends_api_key()
     {
-        $container = [];
-        $history = Middleware::history($container);
+        $this->appendsApiKey(Send::class);
+    }
 
-        $send = new Send(new ElasticEmailClient($apiKey = 'api-key', [$history]));
+    /** @test */
+    public function forward_params_as_http_query()
+    {
+        $client = $this->getMockBuilder(ElasticEmailClient::class)
+            ->setConstructorArgs(['api-key'])
+            ->getMock();
 
-        $send->handle();
+        $params = ['any-parameter' => 'any-parameter-value'];
 
-        $this->assertCount(
-            1, $container,
-            'Expected history middleware was not pushed.'
-        );
+        $expectedParams = ['body' => json_encode($params)];
 
-        /** @var Request $request */
-        $request = $container[0]['request'];
+        $client->expects($this->once())
+            ->method('request')
+            ->with('POST', Send::URI, $expectedParams);
 
-        $this->assertEquals("apikey=$apiKey", $request->getUri()->getQuery());
+        /** @var ElasticEmailClient $client */
+
+        $send = new Send($client);
+
+        $send->handle($params);
     }
 }

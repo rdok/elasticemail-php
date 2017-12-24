@@ -3,7 +3,7 @@
 namespace Tests;
 
 use ElasticEmail\ElasticEmail;
-use ElasticEmail\Email;
+use ElasticEmail\Email\Email;
 use Tests\unit\UnitTestCase;
 
 /**
@@ -15,12 +15,10 @@ class ElasticEmailTest extends UnitTestCase
     /** @test */
     public function has_access_to_send_email_object()
     {
-        $expectedEmailObject = new Email;
-
         $elasticEmail = new ElasticEmail('api-key');
 
         $emailObject = $elasticEmail->email();
 
-        $this->assertEquals($expectedEmailObject, $emailObject);
+        $this->assertInstanceOf(Email::class, $emailObject);
     }
 }

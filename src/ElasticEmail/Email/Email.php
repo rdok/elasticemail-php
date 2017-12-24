@@ -4,10 +4,14 @@
  * @since   12/24/17
  */
 
-namespace ElasticEmail;
+namespace ElasticEmail\Email;
 
-use ElasticEmail\Email\Send;
+use ElasticEmail\ElasticEmailClient;
 
+/**
+ * Access to Email API end points.
+ * @see http://api.elasticemail.com/public/help#Email_header
+ */
 class Email
 {
     /** @var ElasticEmailClient */

@@ -17,9 +17,6 @@ class ElasticEmailClient extends \GuzzleHttp\Client
 {
     static $baseUri = 'https://api.elasticemail.com/v2/';
 
-    /** @var  HandlerStack */
-    private $stack;
-
     public function __construct($apiKey, array $middlewares = [])
     {
         if (empty($apiKey)) {
