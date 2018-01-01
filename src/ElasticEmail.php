@@ -11,7 +11,6 @@ use ElasticEmail\Email\Email;
 /** Access to various categories API end points. */
 class ElasticEmail
 {
-
     /** @var Client */
     private $client;
 
