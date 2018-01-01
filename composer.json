@@ -13,7 +13,6 @@
   },
   "require-dev": {
     "vlucas/phpdotenv": "^2.2",
-    "satooshi/php-coveralls": "^1.0",
     "phpunit/phpunit": "^5.7"
   },
   "autoload": {
@@ -27,7 +26,7 @@
       "ElasticEmail\\": "src/"
     },
     "files": [
-      "src/helpers.php"
+      "helpers.php"
     ]
   },
   "minimum-stability": "stable"
