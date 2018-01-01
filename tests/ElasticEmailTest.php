@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\unit;
+namespace Tests;
 
 use ElasticEmail\ElasticEmail;
 use ElasticEmail\Email\Email;
@@ -9,7 +9,7 @@ use ElasticEmail\Email\Email;
  * @author Rizart Dokollari <***REMOVED***>
  * @since 7/30/16
  */
-class ElasticEmailTest extends UnitTestCase
+class ElasticEmailTest extends TestCase
 {
     /** @test */
     public function has_access_to_send_email_object()

@@ -4,12 +4,11 @@
  * @since   12/24/17
  */
 
-namespace Tests\unit;
+namespace Tests;
 
 use ElasticEmail\Client;
-use ElasticEmail\ElasticEmailException;
 
-class ClientTest extends UnitTestCase
+class ClientTest extends TestCase
 {
     const API_KEY = 'api-key';
 

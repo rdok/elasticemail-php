@@ -10,9 +10,9 @@ use ElasticEmail\Client;
 use ElasticEmail\ElasticEmailException;
 use ElasticEmail\Email\Email;
 use ElasticEmail\Email\Send;
-use Tests\unit\UnitTestCase;
+use Tests\TestCase;
 
-class EmailTest extends UnitTestCase
+class EmailTest extends TestCase
 {
     /** @test */
     public function has_access_to_send_client()

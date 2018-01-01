@@ -4,13 +4,13 @@
  * @since   12/24/17
  */
 
-namespace Tests\unit\Email;
+namespace Tests\Email;
 
 use ElasticEmail\Client;
 use ElasticEmail\Email\Send;
-use Tests\unit\UnitTestCase;
+use Tests\TestCase;
 
-class SendTest extends UnitTestCase
+class SendTest extends TestCase
 {
     /** @test */
     public function appends_api_key()

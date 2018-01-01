@@ -3,18 +3,16 @@
 namespace ElasticEmail\Email;
 
 use ElasticEmail\Client;
-use ElasticEmail\ClientHelpers;
+use ElasticEmail\Response;
 
 /**
  * @author  Rizart Dokollari <***REMOVED***>
  * @since   12/24/17
  * @see http://api.elasticemail.com/public/help#Email_Send
  */
-class Send
+class Send extends Response
 {
     const URI = 'email/send';
-
-    use ClientHelpers;
 
     /** @var Client */
     private $client;

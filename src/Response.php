@@ -7,7 +7,7 @@
 namespace ElasticEmail;
 
 
-trait ClientHelpers
+abstract class Response
 {
     /** @var  \GuzzleHttp\Psr7\Response */
     protected $response;
