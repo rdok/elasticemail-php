@@ -8,7 +8,9 @@ namespace Tests\unit;
 
 use ElasticEmail\ElasticEmail\ClientInterface;
 use ElasticEmail\Client;
+use ElasticEmail\ElasticEmailException;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\Request;
 use Tests\TestCase;
 
 abstract class UnitTestCase extends TestCase
@@ -22,6 +24,9 @@ abstract class UnitTestCase extends TestCase
 
         /** @var ClientInterface $send */
         $send = new $apiEndPointClient($client);
+
+        $this->expectException(ElasticEmailException::class);
+        $this->expectExceptionMessage('Incorrect apikey');
 
         $send->handle();
 

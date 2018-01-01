@@ -18,7 +18,7 @@ class Client extends \GuzzleHttp\Client
 {
     static $baseUri = 'https://api.elasticemail.com/v2/';
 
-    public function __construct($apiKey, array $middlewares = [])
+    public function __construct(string $apiKey, array $middlewares = [])
     {
         if (empty($apiKey)) {
             throw new ElasticEmailException('ElasticEmail API key is missing.');

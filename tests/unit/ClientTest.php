@@ -34,9 +34,7 @@ class ClientTest extends UnitTestCase
     /** @test */
     public function throws_missing_api_key_exception()
     {
-        $this->expectException(ElasticEmailException::class);
-
-        $this->expectExceptionMessage('ElasticEmail API key is missing.');
+        $this->expectException(\TypeError::class);
 
         new Client(null);
     }

@@ -4,7 +4,7 @@
  * @since   12/24/17
  */
 
-namespace tests\unit\Email;
+namespace Tests\unit\Email;
 
 use ElasticEmail\Client;
 use ElasticEmail\Email\Send;
@@ -27,7 +27,7 @@ class SendTest extends UnitTestCase
 
         $params = ['any-parameter' => 'any-parameter-value'];
 
-        $expectedParams = ['body' => json_encode($params)];
+        $expectedParams = ['form_params' => $params];
 
         $client->expects($this->once())
             ->method('request')
