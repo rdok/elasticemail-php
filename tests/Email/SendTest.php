@@ -7,6 +7,7 @@
 namespace Tests\Email;
 
 use ElasticEmail\Client;
+use ElasticEmail\ElasticEmail;
 use ElasticEmail\Email\Send;
 use Tests\TestCase;
 
@@ -16,6 +17,28 @@ class SendTest extends TestCase
     public function appends_api_key()
     {
         $this->appendsApiKey(Send::class);
+    }
+
+    /** @test */
+    public function send_an_email()
+    {
+        $dotenv = new \Dotenv\Dotenv(__DIR__ . '/../../');
+
+        $dotenv->load();
+
+        $client = new Client(getenv('ELASTIC_EMAIL_API_KEY'));
+
+        $send = new Send($client);
+
+        $response = $send->handle([
+            'to'      => '***REMOVED***',
+            'from'    => '***REMOVED***',
+            'subject' => subject(__FUNCTION__),
+        ]);
+
+        $this->assertTrue($response->wasSuccessful());
+
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     /** @test */
