@@ -9,11 +9,12 @@
     }
   ],
   "require": {
-    "guzzlehttp/guzzle": "^6.3"
+    "php": ">=7.0.0",
+    "guzzlehttp/guzzle": "^6.3",
+    "phpunit/phpunit": "^6.5"
   },
   "require-dev": {
-    "vlucas/phpdotenv": "^2.2",
-    "phpunit/phpunit": "^5"
+    "vlucas/phpdotenv": "^2.2"
   },
   "autoload": {
     "psr-4": {
