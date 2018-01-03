@@ -1,10 +1,8 @@
 test:
   override:
-    - phpenv global 7.0
+    - phpenv global 7.0.24
     - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
-    - phpenv global 7.1
-    - ./vendor/bin/phpunit
-    - phpenv global 7.2
+    - phpenv global 7.1.9
     - ./vendor/bin/phpunit
   post:
     - php vendor/bin/coveralls -v
