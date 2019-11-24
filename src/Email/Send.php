@@ -6,7 +6,7 @@ use ElasticEmail\Client;
 use ElasticEmail\Response;
 
 /**
- * @author  Rizart Dokollari <***REMOVED***>
+ * @author  Rizart Dokollari
  * @since   12/24/17
  * @see http://api.elasticemail.com/public/help#Email_Send
  */

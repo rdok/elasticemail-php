@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Rizart Dokollari <***REMOVED***>
+ * @author Rizart Dokollari
  * @since 6/5/16
  */
 

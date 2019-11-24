@@ -1,6 +1,6 @@
 <?php
 /**
- * @author  Rizart Dokollari <***REMOVED***>
+ * @author  Rizart Dokollari
  * @since   12/24/17
  */
 function dd($variable)

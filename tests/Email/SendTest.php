@@ -1,6 +1,6 @@
 <?php
 /**
- * @author  Rizart Dokollari <***REMOVED***>
+ * @author  Rizart Dokollari
  * @since   12/24/17
  */
 
@@ -31,8 +31,8 @@ class SendTest extends TestCase
         $send = new Send($client);
 
         $response = $send->handle([
-            'to'      => '***REMOVED***',
-            'from'    => '***REMOVED***',
+            'to'      => 'mail@gmail.com',
+            'from'    => 'mail@gmail.com',
             'subject' => subject(__FUNCTION__),
         ]);
 
