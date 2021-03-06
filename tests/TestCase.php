@@ -20,7 +20,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         return new Client($key, [$history], $mockHandler);
     }
 
-    protected function assertAPIRequestQueryHas($container, string $string)
+    protected function assertAPIRequestQueryHas($container, $string)
     {
         $this->assertMiddlewarePushed($container);
         $this->assertArrayHasKey('request', $container[0]);
