@@ -22,7 +22,7 @@ class SendTest extends TestCase
         $response = $send->handle([
             'to' => 'mail@gmail.com',
             'from' => 'mail@gmail.com',
-            'subject' => subject(__FUNCTION__),
+            'subject' => $this->subject(__FUNCTION__),
         ]);
 
         $this->assertTrue($response->wasSuccessful());
