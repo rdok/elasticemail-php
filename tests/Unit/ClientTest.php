@@ -33,7 +33,7 @@ class ClientTest extends TestCase
         $container = [];
         $history = Middleware::history($container);
 
-        $client = $this->mockElasticEmailAPIRequest($apiKey = 'key', $history);
+        $client = $this->mockElasticEmailAPIRequest($apiKey = 'key', [$history]);
         $client->request('POST');
 
         $this->assertCount(
