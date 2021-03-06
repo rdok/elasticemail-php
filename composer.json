@@ -13,7 +13,8 @@
     "phpunit/phpunit": "^6.5"
   },
   "require-dev": {
-    "vlucas/phpdotenv": "^2.2"
+    "vlucas/phpdotenv": "^2.2",
+    "spatie/phpunit-watcher": "^1.23"
   },
   "autoload": {
     "psr-4": {
@@ -31,6 +32,7 @@
   },
   "minimum-stability": "stable",
   "scripts": {
-    "phpunit": "vendor/bin/phpunit"
+    "phpunit": "vendor/bin/phpunit",
+    "phpunit-watch": "phpunit-wacher watch"
   }
 }
