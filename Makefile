@@ -20,13 +20,13 @@ update:
 ################################################################################
 # CI
 ################################################################################
-ci-validate:
+validate:
 	docker-compose run --rm php7.2 sh -c 'composer install && composer validate'
-ci-test-php7-2:
+test-php7-2:
 	docker-compose run --rm php7.2 sh -c 'composer install && composer phpunit'
-ci-test-php7-3:
+test-php7-3:
 	docker-compose run --rm php7.3 sh -c 'composer install && composer phpunit'
-ci-test-php7-4:
+test-php7-4:
 	docker-compose run --rm php7.4 sh -c 'composer install && composer phpunit'
-ci-test-php8-0:
+test-php8-0:
 	docker-compose run --rm php8.0 sh -c 'composer install && composer phpunit'
