@@ -18,7 +18,8 @@
     "vlucas/phpdotenv": "^5.3",
     "spatie/phpunit-watcher": "^1.23",
     "phpunit/phpunit": "^8.5",
-    "larapack/dd": "^1.1"
+    "larapack/dd": "^1.1",
+    "php-coveralls/php-coveralls": "^2.4"
   },
   "autoload": {
     "psr-4": {
