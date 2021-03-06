@@ -6,7 +6,7 @@ test: vendor
 	docker-compose run --rm php-cli composer phpunit
 
 test-watch: vendor
-	docker-compose run --rm php-cli composer phpunit
+	docker-compose run --rm php-cli composer phpunit-watch-unit
 
 vendor:
 	docker-compose run --rm php-cli composer install

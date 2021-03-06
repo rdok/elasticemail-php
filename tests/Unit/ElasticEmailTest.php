@@ -5,10 +5,6 @@ namespace Tests;
 use ElasticEmail\ElasticEmail;
 use ElasticEmail\Email\Email;
 
-/**
- * @author Rizart Dokollari
- * @since 7/30/16
- */
 class ElasticEmailTest extends TestCase
 {
     /** @test */
