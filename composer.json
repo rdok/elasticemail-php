@@ -23,13 +23,12 @@
   },
   "autoload": {
     "psr-4": {
-      "ElasticEmail\\": "src/ElasticEmail/"
+      "ElasticEmail\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "tests/",
-      "ElasticEmail\\": "src/"
+      "Tests\\": "tests/"
     }
   },
   "minimum-stability": "stable",
