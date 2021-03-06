@@ -2,7 +2,6 @@
 
 namespace Tests\Integration\Email;
 
-use Dotenv\Dotenv;
 use ElasticEmail\Client;
 use ElasticEmail\Email\Send;
 use Tests\Integration\IntegrationTestCase;
@@ -21,6 +20,8 @@ class SendTest extends IntegrationTestCase
             'to' => $_ENV['TEST_EMAIL_TO'],
             'from' => $_ENV['TEST_EMAIL_FROM'],
             'subject' => $subject,
+            'bodyText' => 'Your mind will answer most questions if you learn '
+                . 'to relax and wait for the answer.'
         ]);
 
         $this->assertTrue($response->wasSuccessful());
