@@ -7,7 +7,7 @@ services:
       - .:/app
     user: ${UID}:${GID}
   php-ci:
-    image: rdok/php-docker:7.4-cli-alpine3.13
+    image: rdok/php-docker:5.5-fpm-alpine
     working_dir: /app
     volumes:
       - .:/app
