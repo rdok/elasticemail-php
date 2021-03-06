@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  php-cli:
+    image: rdok/php-docker:7.4-cli-buster
+    working_dir: /app
+    volumes:
+      - .:/app
+    user: ${UID}:${GID}
+  php-ci:
+    image: rdok/php-docker:8.0-cli-alpine3.13
+    working_dir: /app
+    volumes:
+      - .:/app
