@@ -33,6 +33,6 @@
   "minimum-stability": "stable",
   "scripts": {
     "phpunit": "vendor/bin/phpunit",
-    "phpunit-watch-unit": "phpunit-wacher watch"
+    "phpunit-watch-unit": "phpunit-watcher watch"
   }
 }
