@@ -1,5 +1,0 @@
-.phpunit.result.cache
-/vendor/
-.env
-/tests/fixtures/*
-!/tests/fixtures/.gitignore
