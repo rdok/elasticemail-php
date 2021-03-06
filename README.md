@@ -1,5 +1,5 @@
 # ElasticEmailPHP 
-[![CI][ci_badge]][ci]
+[![unit_tests][ci_badge]][unit_tests]
 
 [![Coverage Status](https://coveralls.io/repos/github/rdok/elasticemail-php/badge.svg?branch=master)](https://coveralls.io/github/rdok/elasticemail-php?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/386386ba-fbe5-4a50-a51c-07bfd7b3617f/mini.png)](https://insight.sensiolabs.com/projects/386386ba-fbe5-4a50-a51c-07bfd7b3617f)
@@ -31,5 +31,5 @@ composer require rdok/elasticemail-php
 - 8.0
 
 
-[ci]: https://github.com/rdok/elasticemail-php/actions/workflows/ci.yml
-[ci_badge]: https://github.com/rdok/elasticemail-php/actions/workflows/ci.yml/badge.svg
+[unit_tests]: https://github.com/rdok/elasticemail-php/actions/workflows/ci.yml
+[unit_tests_badge]: https://github.com/rdok/elasticemail-php/actions/workflows/ci.yml/badge.svg
