@@ -6,7 +6,7 @@ use ElasticEmail\ElasticEmail;
 use ElasticEmail\Email\Email;
 use Tests\TestCase;
 
-class ElasticEmailTest extends TestCase
+class ElasticEmailTest extends UnitTestCase
 {
     /** @test */
     public function has_access_to_send_email_object()

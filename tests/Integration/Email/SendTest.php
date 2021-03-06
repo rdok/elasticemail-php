@@ -26,5 +26,7 @@ class SendTest extends IntegrationTestCase
 
         $this->assertTrue($response->wasSuccessful());
         $this->assertEquals(200, $response->getStatusCode());
+
+        d($response->getBody());
     }
 }

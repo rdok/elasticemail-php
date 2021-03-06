@@ -3,9 +3,9 @@
 namespace Tests\Unit\Email;
 
 use ElasticEmail\Email\Send;
-use Tests\TestCase;
+use Tests\Unit\UnitTestCase;
 
-class SendTest extends TestCase
+class SendTest extends UnitTestCase
 {
     /** @test */
     public function forwards_params_as_http_body()

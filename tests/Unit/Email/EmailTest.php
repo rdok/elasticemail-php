@@ -4,9 +4,9 @@ namespace Tests\Unit\Email;
 
 use ElasticEmail\Email\Email;
 use ElasticEmail\Email\Send;
-use Tests\TestCase;
+use Tests\Unit\UnitTestCase;
 
-class EmailTest extends TestCase
+class EmailTest extends UnitTestCase
 {
     /** @test */
     public function has_access_to_send_client()

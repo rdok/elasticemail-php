@@ -7,7 +7,7 @@ use ElasticEmail\ElasticEmailException;
 use Tests\TestCase;
 use TypeError;
 
-class ClientTest extends TestCase
+class ClientTest extends UnitTestCase
 {
     /** @test */
     public function it_maintains_api_baseuri()
