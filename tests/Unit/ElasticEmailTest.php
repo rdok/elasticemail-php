@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests;
+namespace Tests\Unit;
 
 use ElasticEmail\ElasticEmail;
 use ElasticEmail\Email\Email;
+use Tests\TestCase;
 
 class ElasticEmailTest extends TestCase
 {

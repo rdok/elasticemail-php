@@ -1,31 +1,18 @@
 <?php
-/**
- * @author  Rizart Dokollari
- * @since   12/24/17
- */
 
-namespace Tests;
+namespace Tests\Unit;
 
 use ElasticEmail\Client;
+use Tests\TestCase;
 
 class ClientTest extends TestCase
 {
-    const API_KEY = 'api-key';
-
-    /** @var  Client */
-    private $client;
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->client = new Client(self::API_KEY);
-    }
-
     /** @test */
-    public function uses_correct_api_base_uri()
+    public function it_maintains_api_baseuri()
     {
-        $actualBaseUri = (string)$this->client->getConfig('base_uri');
+        $client = new Client('api_key');
+
+        $actualBaseUri = (string)$client->getConfig('base_uri');
 
         $this->assertEquals(Client::$baseUri, $actualBaseUri);
     }
