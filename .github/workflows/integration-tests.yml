@@ -2,8 +2,14 @@ name: integration-tests
 on:
   push:
     branches: [main]
+    paths:
+      - '.github/workflows/php5-alpine.yml'
+      - 'tests/Integration/**'
   pull_request:
     branches: [main]
+    paths:
+      - '.github/workflows/php5-alpine.yml'
+      - 'tests/Integration/**'
 jobs:
   test-send-email:
     runs-on: ubuntu-20.04
@@ -12,8 +18,8 @@ jobs:
       - run: |
           docker-compose run \
             -e ELASTIC_EMAIL_API_KEY=${{ secrets.ELASTIC_EMAIL_API_KEY }} \
-            -e INTEGRATION_TEST_EMAIL_FROM=${{ secrets.INTEGRATION_TEST_EMAIL_FROM }} \
-            -e INTEGRATION_TEST_EMAIL_TO=${{ secrets.INTEGRATION_TEST_EMAIL_TO }} \
+            -e TEST_EMAIL_FROM=${{ secrets.TEST_EMAIL_FROM }} \
+            -e TEST_EMAIL_TO=${{ secrets.TEST_EMAIL_TO }} \
             -e CI=true \
             --rm php7.2 sh -c '\
               composer install && \
