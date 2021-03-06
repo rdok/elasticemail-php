@@ -30,7 +30,7 @@
   },
   "minimum-stability": "stable",
   "scripts": {
-    "phpunit": "vendor/bin/phpunit",
-    "phpunit-watch-unit": "phpunit-watcher watch"
+    "phpunit": "vendor/bin/phpunit --testsuite Unit",
+    "phpunit-watch-unit": "phpunit-watcher watch --testsuite Unit"
   }
 }
