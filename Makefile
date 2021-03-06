@@ -3,28 +3,30 @@ export GID = $(shell id -g)
 export PWD = $(shell pwd)
 
 test: vendor
-	docker-compose run --rm php-cli composer phpunit
+	docker-compose run --rm php7.2 composer phpunit
 
 test-watch: vendor
-	docker-compose run --rm php-cli composer phpunit-watch-unit
+	docker-compose run --rm php7.2 composer phpunit-watch-unit
 
 vendor:
-	docker-compose run --rm php-cli composer install
+	docker-compose run --rm php7.2 composer install
 
 shell:
-	docker-compose run --rm php-cli bash
+	docker-compose run --rm php7.2 sh
 
 update:
-	docker-compose run --rm php-cli composer update
+	docker-compose run --rm php7.2 composer update
 
 ################################################################################
 # CI
 ################################################################################
-ci-vendor:
-	docker-compose run --rm php-ci composer install
-
-ci-validate: ci-vendor
-	docker-compose run --rm php-ci composer validate
-
-ci-test: ci-vendor
-	docker-compose run --rm php-ci composer phpunit
+ci-validate:
+	docker-compose run --rm php7.2 sh -c 'composer install && composer validate'
+ci-test-php7-2:
+	docker-compose run --rm php7.2 sh -c 'composer install && composer phpunit'
+ci-test-php7-3:
+	docker-compose run --rm php7.3 sh -c 'composer install && composer phpunit'
+ci-test-php7-4:
+	docker-compose run --rm php7.4 sh -c 'composer install && composer phpunit'
+ci-test-php8-0:
+	docker-compose run --rm php8.0 sh -c 'composer install && composer phpunit'
