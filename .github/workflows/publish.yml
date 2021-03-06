@@ -24,7 +24,7 @@ jobs:
           git add --all && git commit -m 'Remove non production files.'
       - run: |
           git tag \
-            --annotate ${{ github.event.inputs.version }} \
-            --message ${{ github.event.inputs.message }}
+            --annotate "${{ github.event.inputs.version }}" \
+            --message "${{ github.event.inputs.message }}"
           git push origin ${{ github.event.inputs.version }}
 
