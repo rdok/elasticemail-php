@@ -1,32 +1,26 @@
 <?php
 
-namespace Tests\Integration;
+namespace Tests\Integration\Email;
 
 use Dotenv\Dotenv;
 use ElasticEmail\Client;
 use ElasticEmail\Email\Send;
-use Tests\TestCase;
+use Tests\Integration\IntegrationTestCase;
 
-class SendTest extends TestCase
+class SendTest extends IntegrationTestCase
 {
     /** @test */
     public function send_an_email()
     {
-        $dotenv = Dotenv::createImmutable(__DIR__ . '../../');
-        $dotenv->load();
-
-        $apiKey = getenv('ELASTIC_EMAIL_API_KEY');
-        $from = getenv('INTEGRATION_TEST_EMAIL_FROM');
-        $to = getenv('INTEGRATION_TEST_EMAIL_TO');
-
-        $client = new Client($apiKey);
-
+        $this->loadEnv();
+        $client = new Client($_ENV['ELASTIC_EMAIL_API_KEY']);
         $send = new Send($client);
 
+        $subject = "elasticemail-php: Integration test ensuring email send.";
         $response = $send->handle([
-            'to' => $to,
-            'from' => $from,
-            'subject' => $this->subject(__FUNCTION__),
+            'to' => $_ENV['INTEGRATION_TEST_EMAIL_TO'],
+            'from' => $_ENV['INTEGRATION_TEST_EMAIL_FROM'],
+            'subject' => $subject,
         ]);
 
         $this->assertTrue($response->wasSuccessful());
