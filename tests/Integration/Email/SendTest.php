@@ -2,8 +2,7 @@
 
 namespace Tests\Integration\Email;
 
-use ElasticEmail\Client;
-use ElasticEmail\Email\Send;
+use ElasticEmail\ElasticEmail;
 use Tests\Integration\IntegrationTestCase;
 
 class SendTest extends IntegrationTestCase
@@ -12,11 +11,10 @@ class SendTest extends IntegrationTestCase
     public function send_an_email()
     {
         $this->loadEnv();
-        $client = new Client($_ENV['ELASTIC_EMAIL_API_KEY']);
-        $send = new Send($client);
-
         $subject = "elasticemail-php: Integration test ensuring email send.";
-        $response = $send->handle([
+
+        $elasticEmail = new ElasticEmail($_ENV['ELASTIC_EMAIL_API_KEY']);
+        $response = $elasticEmail->email()->send([
             'to' => $_ENV['TEST_EMAIL_TO'],
             'from' => $_ENV['TEST_EMAIL_FROM'],
             'subject' => $subject,
