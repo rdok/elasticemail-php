@@ -8,7 +8,7 @@
   
 ElasticEmailPHP is a PHP Library for interacting with [Elastic Email platform API](http://api.elasticemail.com/public/help).
 
-## Example
+### Example
 ```php
 $elasticEmail = new \ElasticEmail\ElasticEmail('your_elastic_api_key');
 
@@ -19,18 +19,23 @@ $elasticEmail->email()->send([
 ]);
 ```
 
-## Installation
+### Installation
 Using [composer](https://getcomposer.org/download/)
 ```bash
 composer require rdok/elasticemail-php
 ```
+
+### Supported features
+##### [Email](http://api.elasticemail.com/public/help#Email_header)
+- [Send](http://api.elasticemail.com/public/help#Email_Send)
+- [Status](http://api.elasticemail.com/public/help#Email_Status)
+
 
 ## Supported PHP versions
 - 7.2
 - 7.3
 - 7.4
 - 8.0
-
 
 [packagist]: https://packagist.org/packages/rdok/elasticemail-php
 [packagist_badge]: https://img.shields.io/badge/Packagist-grey?style=flat-square&logo=packagist
