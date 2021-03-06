@@ -18,7 +18,11 @@ class Client extends \GuzzleHttp\Client
 {
     static $baseUri = 'https://api.elasticemail.com/v2/';
 
-    public function __construct(string $apiKey, array $middlewares = [])
+    public function __construct(
+        string $apiKey,
+        array $middlewares = [],
+        $handler = null
+    )
     {
         if (empty($apiKey)) {
             throw new ElasticEmailException('ElasticEmail API key is missing.');
@@ -26,13 +30,13 @@ class Client extends \GuzzleHttp\Client
 
         parent::__construct([
             'base_uri' => self::$baseUri,
-            'handler'  => $this->handler($apiKey, $middlewares),
+            'handler' => $this->handler($apiKey, $middlewares, $handler),
         ]);
     }
 
-    public function handler($apikey, array $externalMiddlewares = [])
+    public function handler($apikey, array $middlewares = [], $handler = null)
     {
-        $stack = HandlerStack::create();
+        $stack = HandlerStack::create($handler);
 
         $stack->push(
             Middleware::mapRequest(
@@ -49,9 +53,13 @@ class Client extends \GuzzleHttp\Client
         $stack->push(Middleware::mapResponse(
             function (ResponseInterface $response) {
 
-                $body = json_decode((string)$response->getBody(), true);
+                try {
+                    $body = json_decode((string)$response->getBody(), true);
+                } catch (\Exception $error) {
+                    throw new ElasticEmailException('Unable to decode JSON response.');
+                }
 
-                if ( ! $body['success']) {
+                if (!$body['success']) {
                     throw new ElasticEmailException($body['error']);
                 }
 
@@ -59,7 +67,7 @@ class Client extends \GuzzleHttp\Client
             }
         ));
 
-        foreach ($externalMiddlewares as $middleware) {
+        foreach ($middlewares as $middleware) {
             $stack->push($middleware);
         }
 

@@ -1,42 +1,19 @@
 <?php
-/**
- * @author  Rizart Dokollari
- * @since   12/24/17
- */
 
 namespace Tests;
 
-use ElasticEmail\ElasticEmail\ClientInterface;
 use ElasticEmail\Client;
-use ElasticEmail\ElasticEmailException;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\Psr7\Response;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    public function appendsApiKey($apiEndPointClient)
+    protected function mockElasticEmailAPIRequest($apiKey, $history)
     {
-        $container = [];
-        $history = Middleware::history($container);
+        $mockHandler = new MockHandler([
+            new Response(200, [], json_encode(['success' => true])),
+        ]);
 
-        $client = new Client($apiKey = 'api-key', [$history]);
-
-        /** @var ClientInterface $send */
-        $send = new $apiEndPointClient($client);
-
-        $this->expectException(ElasticEmailException::class);
-        $this->expectExceptionMessage('Incorrect apikey');
-
-        $send->handle();
-
-        $this->assertCount(
-            1, $container,
-            'Expected history middleware was not pushed.'
-        );
-
-        /** @var Request $request */
-        $request = $container[0]['request'];
-
-        $this->assertEquals("apikey=$apiKey", $request->getUri()->getQuery());
+        return new Client($apiKey, [$history], $mockHandler);
     }
 }
