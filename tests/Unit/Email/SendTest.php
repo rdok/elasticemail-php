@@ -17,34 +17,22 @@ class SendTest extends TestCase
         $params = ['any-parameter' => 'any-parameter-value'];
         $send->handle($params);
 
-        $this->assertMiddlewarePushed($container);
         $this->assertAPIRequestBodyHas($params, $container);
     }
 
-//    /** @test */
-//    public function use_multipart_option_to_send_files()
-//    {
-//        $client = $this->getMockBuilder(Client::class)
-//            ->setConstructorArgs(['api-key'])
-//            ->getMock();
-//
-//        $params = [$name = 'any-parameter' => $content = 'any-parameter-value'];
-//
-//        $expectedParams = ['multipart' => [
-//            [
-//                'name' => $name,
-//                'contents' => $content
-//            ]
-//        ]];
-//
-//        $client->expects($this->once())
-//            ->method('request')
-//            ->with('POST', Send::URI, $expectedParams);
-//
-//        /** @var Client $client */
-//
-//        $send = new Send($client);
-//
-//        $send->handle($params, true);
-//    }
+    /** @test */
+    public function use_multipart_option_to_send_files()
+    {
+        $container = [];
+        $client = $this->mockElasticEmailAPIRequest($container);
+        $send = new Send($client);
+
+        $params = [$name = 'any-parameter' => $content = 'file-content'];
+        $expected = ['name' => $name, 'contents' => $content];
+
+        $send->handle($params, true);
+
+        $this->assertAPIRequestMultipartHas($expected, $container);
+    }
+
 }

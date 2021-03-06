@@ -50,4 +50,24 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $expected = http_build_query($expected);
         $this->assertSame($expected, $actual);
     }
+
+    protected function assertAPIRequestMultipartHas(array $params, array $container)
+    {
+        $this->assertMiddlewarePushed($container);
+        $this->assertArrayHasKey('request', $container[0]);
+
+        /** @var Request $request */
+        $request = $container[0]['request'];
+
+        $contents = $request->getBody()->getContents();
+
+        $expected = sprintf('name="%s"', $params['name']);
+        $this->assertContains($expected, $contents);
+
+        $expected = sprintf("\r\n%s\r\n", $params['contents']);
+        $this->assertContains($expected, $contents);
+
+        $expected = sprintf("Content-Length: %s\r\n", strlen($params['contents']));
+        $this->assertContains($expected, $contents);
+    }
 }
