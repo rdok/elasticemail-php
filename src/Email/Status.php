@@ -7,7 +7,7 @@ use ElasticEmail\Response;
 
 class Status extends Response
 {
-    const URI = 'email/send';
+    const URI = 'email/status';
 
     /** @var Client */
     private $client;
@@ -17,9 +17,11 @@ class Status extends Response
         $this->client = $client;
     }
 
-    public function request()
+    public function request(string $messageID)
     {
-        $this->response = $this->client->request('POST', self::URI);
+        $options = ['query' => ['messageID' => $messageID]];
+
+        $this->response = $this->client->request('POST', self::URI, $options);
 
         return $this;
     }
