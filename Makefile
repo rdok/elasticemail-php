@@ -14,6 +14,9 @@ vendor:
 shell:
 	docker-compose run --rm php-cli bash
 
+update:
+	docker-compose run --rm php-cli composer update
+
 ################################################################################
 # CI
 ################################################################################
