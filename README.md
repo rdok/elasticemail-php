@@ -2,6 +2,7 @@
 [![unit_tests][unit_tests_badge]][unit_tests]
 [![unit_tests][unit_tests_badge]][unit_tests]
 [![integration_tests][integration_tests_badge]][integration_tests]  
+[![Packagaist][packagist_badge]][packagist]
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/386386ba-fbe5-4a50-a51c-07bfd7b3617f/mini.png)](https://insight.sensiolabs.com/projects/386386ba-fbe5-4a50-a51c-07bfd7b3617f)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rdok/elasticemail-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/rdok/elasticemail-php/?branch=master)
   
@@ -31,6 +32,8 @@ composer require rdok/elasticemail-php
 - 8.0
 
 
+[packagist]: https://packagist.org/packages/rdok/elasticemail-php
+[packagist_badge]: https://img.shields.io/badge/Packagist-grey?style=flat-square&logo=packagist
 [unit_tests]: https://github.com/rdok/elasticemail-php/actions/workflows/unit-tests.yml
 [unit_tests_badge]: https://github.com/rdok/elasticemail-php/actions/workflows/unit-tests.yml/badge.svg
 [integration_tests]: https://github.com/rdok/elasticemail-php/actions/workflows/integration-tests.yml
