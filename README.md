@@ -18,6 +18,7 @@ $elasticEmail->email()->send([
     'from'    => 'from_email'
 ]);
 ```
+> See [integration tests](https://github.com/rdok/elasticemail-php/tree/main/tests/Integration/Email) for more examples.
 
 ### Installation
 Using [composer](https://getcomposer.org/download/)
