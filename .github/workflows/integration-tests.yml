@@ -1,0 +1,16 @@
+name: integration-tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  test-send-email:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: test-integration-send-email
+    env:
+      ELASTIC_EMAIL_API_KEY: ${{ secrets.ELASTIC_EMAIL_API_KEY }}
+      INTEGRATION_TEST_EMAIL_FROM: ${{ secrets.INTEGRATION_TEST_EMAIL_FROM }}
+      INTEGRATION_TEST_EMAIL_TO: ${{ secrets.INTEGRATION_TEST_EMAIL_TO }}
