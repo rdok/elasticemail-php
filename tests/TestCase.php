@@ -62,12 +62,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $contents = $request->getBody()->getContents();
 
         $expected = sprintf('name="%s"', $params['name']);
-        $this->assertContains($expected, $contents);
+        $this->assertStringContainsString($expected, $contents);
 
         $expected = sprintf("\r\n%s\r\n", $params['contents']);
-        $this->assertContains($expected, $contents);
+        $this->assertStringContainsString($expected, $contents);
 
         $expected = sprintf("Content-Length: %s\r\n", strlen($params['contents']));
-        $this->assertContains($expected, $contents);
+        $this->assertStringContainsString($expected, $contents);
     }
 }
