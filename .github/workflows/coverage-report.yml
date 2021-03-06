@@ -12,10 +12,9 @@ jobs:
       - name: Upload coverage results to Coveralls
         run: |
           docker-compose run \
-            --user="$(id -u):$(id -g)" \
             -e COVERALLS_REPO_TOKEN=${{ secrets.GITHUB_TOKEN }} \
             --rm php7.2 sh -c '\
               composer install \
-              && ./vendor/bin/phpunit --testsuite Unit --coverage-clover build-logs/clover.xml \
-              && ./vendor/bin/php-coveralls --coverage_clover=build-logs/clover.xml -v
+              && ./vendor/bin/phpunit --testsuite Unit --coverage-clover .github/logs/clover.xml \
+              && ./vendor/bin/php-coveralls --coverage_clover=.github/logs/clover.xml -v \
             '
