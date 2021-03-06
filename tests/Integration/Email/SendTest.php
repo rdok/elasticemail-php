@@ -18,8 +18,8 @@ class SendTest extends IntegrationTestCase
 
         $subject = "elasticemail-php: Integration test ensuring email send.";
         $response = $send->handle([
-            'to' => $_ENV['INTEGRATION_TEST_EMAIL_TO'],
-            'from' => $_ENV['INTEGRATION_TEST_EMAIL_FROM'],
+            'to' => $_ENV['TEST_EMAIL_TO'],
+            'from' => $_ENV['TEST_EMAIL_FROM'],
             'subject' => $subject,
         ]);
 
