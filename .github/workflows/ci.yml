@@ -1,11 +1,9 @@
 name: CI
-
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-
+    branches: [main]
 jobs:
   validate:
     runs-on: ubuntu-20.04
