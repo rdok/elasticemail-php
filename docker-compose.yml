@@ -1,13 +1,30 @@
 version: "3.7"
 services:
-  php-cli:
-    image: rdok/php-docker:7.4-cli-buster
+  php7.2: &php-service
+    build: &php-build
+      context: .
+      dockerfile: .docker/Dockerfile
+      args:
+        - PHP_VERSION=7.2
+        - ALPINE_VERSION=3.12
     working_dir: /app
     volumes:
       - .:/app
-    user: ${UID}:${GID}
-  php-ci:
-    image: rdok/php-docker:5.5-fpm-alpine
-    working_dir: /app
-    volumes:
-      - .:/app
+  php7.3:
+    <<: *php-service
+    build:
+      <<: *php-build
+      args:
+        - PHP_VERSION=7.3
+  php7.4:
+    <<: *php-service
+    build:
+      <<: *php-build
+      args:
+        - PHP_VERSION=7.4
+  php8.0:
+    <<: *php-service
+    build:
+      <<: *php-build
+      args:
+        - PHP_VERSION=8.0
