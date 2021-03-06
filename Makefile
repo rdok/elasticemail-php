@@ -7,3 +7,7 @@ test: vendor
 
 vendor:
 	docker-compose run --rm php-cli composer install
+
+shell:
+	docker-compose run --rm php-cli bash
+
