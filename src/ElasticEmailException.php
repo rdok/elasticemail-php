@@ -2,6 +2,8 @@
 
 namespace ElasticEmail;
 
-class ElasticEmailException extends \Exception
+use Exception;
+
+class ElasticEmailException extends Exception
 {
 }
