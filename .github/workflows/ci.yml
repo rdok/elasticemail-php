@@ -7,37 +7,31 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-20.04
-    needs: [cache]
     steps:
       - uses: actions/checkout@v2
       - name: Validate composer.json and composer.lock
-        run: make ci-validate
-  cache:
+        run: make validate
+  php7-2:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v2
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
-  phpunit:
-    runs-on: ubuntu-20.04
-    needs: [cache]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Load cache
-        uses: actions/cache@v2
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
       - name: Run test suite
-        run: make ci-test
+        run: make test-php7-2
+  php7-3:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run test suite
+        run: make test-php7-3
+  php7-4:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run test suite
+        run: make test-php7-4
+  php8-0:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run test suite
+        run: make test-php8-0
