@@ -29,5 +29,8 @@
       "helpers.php"
     ]
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "scripts": {
+    "phpunit": "vendor/bin/phpunit"
+  }
 }
