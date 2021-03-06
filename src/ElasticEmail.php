@@ -3,6 +3,7 @@
 namespace ElasticEmail;
 
 use ElasticEmail\Email\Email;
+use ElasticEmail\Email\Status;
 
 /** Access to various categories API end points. */
 class ElasticEmail
@@ -19,5 +20,10 @@ class ElasticEmail
     public function email()
     {
         return new Email($this->client);
+    }
+
+    public function status()
+    {
+        return new Status($this->client);
     }
 }
