@@ -37,7 +37,7 @@ test-php8-0:
 .env:
 	cp .env.example .env
 
-test-integration-send-email: .env
+test-integration-send-email:
 	docker-compose run --rm php7.2 sh -c '\
 		composer install && \
 		./vendor/bin/phpunit tests/Integration/Email/SendTest \
