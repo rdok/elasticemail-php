@@ -10,10 +10,6 @@ use GuzzleHttp\Psr7\Response;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    function subject($functionName)
-    {
-        return sprintf('ElasticEmail Test: %s', $functionName);
-    }
     protected function mockElasticEmailAPIRequest(&$container = [], $key = 'key')
     {
         $history = Middleware::history($container);
