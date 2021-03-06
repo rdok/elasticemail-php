@@ -8,13 +8,13 @@
     }
   ],
   "require": {
-    "php": ">=5.5",
+    "php": "^7.2 | ^8.0",
     "guzzlehttp/guzzle": "^6.5"
   },
   "require-dev": {
+    "vlucas/phpdotenv": "^5.3",
     "spatie/phpunit-watcher": "^1.23",
-    "phpunit/phpunit": "^9.5",
-    "vlucas/phpdotenv": "^5.3"
+    "phpunit/phpunit": "^8.5"
   },
   "autoload": {
     "psr-4": {
