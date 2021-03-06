@@ -21,9 +21,4 @@ class ElasticEmail
     {
         return new Email($this->client);
     }
-
-    public function status()
-    {
-        return new Status($this->client);
-    }
 }

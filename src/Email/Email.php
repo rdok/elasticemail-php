@@ -24,4 +24,9 @@ class Email
 
         return $send->handle($params);
     }
+
+    public function status()
+    {
+        return new Status($this->client);
+    }
 }
