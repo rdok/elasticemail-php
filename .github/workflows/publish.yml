@@ -19,6 +19,8 @@ jobs:
           git config --local user.name "GitHub Action"
       - name: Remove non production files
         run: |
+          rm -rf .docker .github tests .env* .gitignore docker-compose.yml \
+            Makefile phpunit.xml
           git add --all && git commit -m 'Remove non production files.'
       - run: |
           git tag \
