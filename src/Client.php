@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 /** HTTP client: sets correct base URI & api key and other middlewares. */
 class Client extends \GuzzleHttp\Client
 {
-    static $baseUri = 'https://api.elasticemail.com/v2/';
+    public static $baseUri = 'https://api.elasticemail.com/v2/';
 
     public function __construct(
         string $apiKey,
