@@ -5,7 +5,6 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
       args:
-        - PHP_VERSION=7.2
         - ALPINE_VERSION=3.12
     working_dir: /app
     volumes:
