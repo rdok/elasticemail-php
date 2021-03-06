@@ -5,6 +5,7 @@ namespace Tests;
 use ElasticEmail\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
@@ -17,5 +18,36 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         ]);
 
         return new Client($key, [$history], $mockHandler);
+    }
+
+    protected function assertAPIRequestQueryHas($container, string $string)
+    {
+        $this->assertMiddlewarePushed($container);
+        $this->assertArrayHasKey('request', $container[0]);
+
+        /** @var Request $request */
+        $request = $container[0]['request'];
+
+        $this->assertEquals($string, $request->getUri()->getQuery());
+    }
+
+    protected function assertMiddlewarePushed($container = [])
+    {
+        $error = 'Expected history middleware was not pushed.';
+
+        $this->assertCount(1, $container, $error);
+    }
+
+    protected function assertAPIRequestBodyHas(array $expected, $container)
+    {
+        $this->assertMiddlewarePushed($container);
+        $this->assertArrayHasKey('request', $container[0]);
+
+        /** @var Request $request */
+        $request = $container[0]['request'];
+
+        $actual = (string)$request->getBody();
+        $expected = http_build_query($expected);
+        $this->assertSame($expected, $actual);
     }
 }

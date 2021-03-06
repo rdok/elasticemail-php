@@ -3,7 +3,6 @@
 namespace Tests\Unit\Email;
 
 use ElasticEmail\Email\Send;
-use GuzzleHttp\Psr7\Request;
 use Tests\TestCase;
 
 class SendTest extends TestCase
@@ -18,15 +17,8 @@ class SendTest extends TestCase
         $params = ['any-parameter' => 'any-parameter-value'];
         $send->handle($params);
 
-        $error = 'Expected history middleware was not pushed.';
-        $this->assertCount(1, $container, $error);
-
-        /** @var Request $request */
-        $request = $container[0]['request'];
-
-        $expected = http_build_query($params);
-        $actual = (string)$request->getBody();
-        $this->assertSame($expected, $actual);
+        $this->assertMiddlewarePushed($container);
+        $this->assertAPIRequestBodyHas($params, $container);
     }
 
 //    /** @test */

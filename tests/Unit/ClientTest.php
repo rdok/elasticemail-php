@@ -3,9 +3,8 @@
 namespace Tests\Unit;
 
 use ElasticEmail\Client;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Request;
 use Tests\TestCase;
+use TypeError;
 
 class ClientTest extends TestCase
 {
@@ -22,7 +21,7 @@ class ClientTest extends TestCase
     /** @test */
     public function throws_missing_api_key_exception()
     {
-        $this->expectException(\TypeError::class);
+        $this->expectException(TypeError::class);
 
         new Client(null);
     }
@@ -31,18 +30,11 @@ class ClientTest extends TestCase
     public function it_appends_api_key_as_query_string()
     {
         $container = [];
+
         $client = $this->mockElasticEmailAPIRequest($container, $key = 'key');
+
         $client->request('POST');
 
-        $this->assertCount(
-            1, $container,
-            'Expected history middleware was not pushed.'
-        );
-
-        /** @var Request $request */
-        $request = $container[0]['request'];
-
-        $this->assertEquals("apikey=$key", $request->getUri()->getQuery());
+        $this->assertAPIRequestQueryHas($container, "apikey=$key");
     }
-
 }
