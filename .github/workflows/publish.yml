@@ -25,6 +25,6 @@ jobs:
       - run: |
           git tag \
             --annotate ${{ github.event.inputs.version }} \
-            --message ${{ github.event.inputs.description }}
+            --message ${{ github.event.inputs.message }}
           git push origin ${{ github.event.inputs.version }}
 
