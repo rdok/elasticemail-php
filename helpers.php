@@ -1,8 +1,5 @@
 <?php
-/**
- * @author  Rizart Dokollari
- * @since   12/24/17
- */
+
 function dd($variable)
 {
     var_dump($variable);

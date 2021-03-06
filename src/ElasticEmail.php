@@ -1,8 +1,4 @@
 <?php
-/**
- * @author Rizart Dokollari
- * @since 6/5/16
- */
 
 namespace ElasticEmail;
 

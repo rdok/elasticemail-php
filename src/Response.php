@@ -1,11 +1,6 @@
 <?php
-/**
- * @author  Rizart Dokollari
- * @since   12/24/17
- */
 
 namespace ElasticEmail;
-
 
 abstract class Response
 {
