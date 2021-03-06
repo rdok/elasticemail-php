@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - name: Setup GitHub action user
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
       - name: Remove non production files
         run: |
           rm -rf .docker .github tests .env* .gitignore docker-compose.yml \
