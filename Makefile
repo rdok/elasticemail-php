@@ -14,3 +14,14 @@ vendor:
 shell:
 	docker-compose run --rm php-cli bash
 
+################################################################################
+# CI
+################################################################################
+ci-vendor:
+	docker-compose run --rm php-ci composer install
+
+ci-validate: ci-vendor
+	docker-compose run --rm php-ci composer validate
+
+ci-test: ci-vendor
+	docker-compose run --rm php-ci composer phpunit
