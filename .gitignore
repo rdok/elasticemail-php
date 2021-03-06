@@ -3,4 +3,3 @@
 .env
 /tests/fixtures/*
 !/tests/fixtures/.gitignore
-.idea/
