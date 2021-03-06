@@ -6,8 +6,6 @@ use ElasticEmail\Client;
 use ElasticEmail\Response;
 
 /**
- * @author  Rizart Dokollari
- * @since   12/24/17
  * @see http://api.elasticemail.com/public/help#Email_Send
  */
 class Send extends Response
@@ -31,9 +29,9 @@ class Send extends Response
         return $this;
     }
 
-    protected function transform(array $params, $muiltipartOption)
+    protected function transform(array $params, $multipartOption)
     {
-        if ( ! $muiltipartOption) {
+        if (!$multipartOption) {
             return ['form_params' => $params];
         }
 
@@ -41,7 +39,7 @@ class Send extends Response
 
         foreach ($params as $key => $value) {
             $multipart[] = [
-                'name'     => $key,
+                'name' => $key,
                 'contents' => $value
             ];
         }
