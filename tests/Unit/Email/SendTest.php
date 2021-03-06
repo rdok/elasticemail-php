@@ -3,7 +3,6 @@
 namespace Tests\Unit\Email;
 
 use ElasticEmail\Email\Send;
-use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use Tests\TestCase;
 
@@ -13,8 +12,7 @@ class SendTest extends TestCase
     public function forwards_params_as_http_body()
     {
         $container = [];
-        $history = Middleware::history($container);
-        $client = $this->mockElasticEmailAPIRequest('key', [$history]);
+        $client = $this->mockElasticEmailAPIRequest($container);
         $send = new Send($client);
 
         $params = ['any-parameter' => 'any-parameter-value'];

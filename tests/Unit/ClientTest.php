@@ -31,9 +31,7 @@ class ClientTest extends TestCase
     public function it_appends_api_key_as_query_string()
     {
         $container = [];
-        $history = Middleware::history($container);
-
-        $client = $this->mockElasticEmailAPIRequest($apiKey = 'key', [$history]);
+        $client = $this->mockElasticEmailAPIRequest($container, $key = 'key');
         $client->request('POST');
 
         $this->assertCount(
@@ -44,7 +42,7 @@ class ClientTest extends TestCase
         /** @var Request $request */
         $request = $container[0]['request'];
 
-        $this->assertEquals("apikey=$apiKey", $request->getUri()->getQuery());
+        $this->assertEquals("apikey=$key", $request->getUri()->getQuery());
     }
 
 }
