@@ -8,6 +8,7 @@ on:
       message:
         description: 'Brief description of new release.'
         required: true
+        
 jobs:
   tag-and-publish:
     runs-on: ubuntu-20.04
