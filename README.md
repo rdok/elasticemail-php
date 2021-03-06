@@ -8,7 +8,7 @@
   
 ElasticEmailPHP is a PHP Library for interacting with [Elastic Email platform API](http://api.elasticemail.com/public/help).
 
-### Example
+### Usage
 ```php
 $elasticEmail = new \ElasticEmail\ElasticEmail('your_elastic_api_key');
 
