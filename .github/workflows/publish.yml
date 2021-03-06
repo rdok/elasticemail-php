@@ -1,13 +1,13 @@
 name: publish
 on:
-    workflow_dispatch:
-      inputs:
-        version:
-          description: 'The bumped up git tag version.'
-          required: true
-        message:
-          description: 'Brief description of new release.'
-          required: true
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The bumped up git tag version.'
+        required: true
+      message:
+        description: 'Brief description of new release.'
+        required: true
 jobs:
   tag-and-publish:
     runs-on: ubuntu-20.04
