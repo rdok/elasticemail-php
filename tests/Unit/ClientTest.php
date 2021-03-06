@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use ElasticEmail\Client;
+use ElasticEmail\ElasticEmailException;
 use Tests\TestCase;
 use TypeError;
 
@@ -21,9 +22,9 @@ class ClientTest extends TestCase
     /** @test */
     public function throws_missing_api_key_exception()
     {
-        $this->expectException(TypeError::class);
+        $this->expectException(ElasticEmailException::class);
 
-        new Client(null);
+        new Client('');
     }
 
     /** @test */
