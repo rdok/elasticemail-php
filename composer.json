@@ -4,7 +4,10 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Rizart Dokollari"
+      "name": "Rizart Dokollari",
+      "email": "r.dokollari@gmail.com",
+      "homepage": "https://rdok.co.uk/",
+      "role": "Maintainer"
     }
   ],
   "require": {
