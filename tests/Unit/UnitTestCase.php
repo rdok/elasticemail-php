@@ -32,13 +32,6 @@ class UnitTestCase extends TestCase
         return new Client($key, [$history], $mockHandler);
     }
 
-    protected function assertMiddlewarePushed($container = [])
-    {
-        $error = 'Expected history middleware was not pushed.';
-
-        $this->assertCount(1, $container, $error);
-    }
-
     protected function assertAPIRequestBodyHas(array $expected, $container)
     {
         $this->assertMiddlewarePushed($container);
@@ -50,6 +43,13 @@ class UnitTestCase extends TestCase
         $actual = (string)$request->getBody();
         $expected = http_build_query($expected);
         $this->assertSame($expected, $actual);
+    }
+
+    protected function assertMiddlewarePushed($container = [])
+    {
+        $error = 'Expected history middleware was not pushed.';
+
+        $this->assertCount(1, $container, $error);
     }
 
     protected function assertAPIRequestMultipartHas(array $params, array $container)
@@ -81,5 +81,15 @@ class UnitTestCase extends TestCase
         $request = $container[0]['request'];
 
         $this->assertEquals($string, $request->getUri()->getQuery());
+    }
+
+    protected function assertAPIBaseURIEquals($container, $string)
+    {
+        $this->assertArrayHasKey('request', $container[0]);
+
+        /** @var Request $request */
+        $request = $container[0]['request'];
+
+        $this->assertEquals($string, $request->getUri()->getHost());
     }
 }

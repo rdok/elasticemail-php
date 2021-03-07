@@ -4,19 +4,19 @@ namespace Tests\Unit;
 
 use ElasticEmail\Client;
 use ElasticEmail\ElasticEmailException;
-use Tests\TestCase;
-use TypeError;
 
 class ClientTest extends UnitTestCase
 {
     /** @test */
-    public function it_maintains_api_baseuri()
+    public function it_maintains_api_host()
     {
-        $client = new Client('api_key');
+        $container = [];
 
-        $actualBaseUri = (string)$client->getConfig('base_uri');
+        $client = $this->mockElasticEmailAPIRequest($container, $key = 'key');
 
-        $this->assertEquals(Client::$baseUri, $actualBaseUri);
+        $client->request('POST');
+
+        $this->assertAPIBaseURIEquals($container, 'api.elasticemail.com');
     }
 
     /** @test */
