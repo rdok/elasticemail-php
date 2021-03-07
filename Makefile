@@ -4,18 +4,16 @@ export PWD = $(shell pwd)
 
 test: vendor
 	docker-compose run --rm php7.2 composer phpunit
-
 test-watch: vendor
 	docker-compose run --rm php7.2 composer phpunit-watch-unit
-
 vendor:
 	docker-compose run --rm php7.2 composer install
-
 shell:
 	docker-compose run --rm php7.2 sh
-
 update:
 	docker-compose run --rm php7.2 composer update
+code-sniffer:
+	docker-compose run --rm php7.2 ./vendor/bin/phpcs
 
 ################################################################################
 # CI
