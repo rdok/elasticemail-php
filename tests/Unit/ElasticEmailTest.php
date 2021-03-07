@@ -16,5 +16,4 @@ class ElasticEmailTest extends UnitTestCase
 
         $this->assertInstanceOf(Email::class, $emailObject);
     }
-
 }

@@ -11,7 +11,7 @@ class SendTest extends UnitTestCase
     public function forwards_params_as_http_body()
     {
         $container = [];
-        $client = $this->mockElasticEmailAPIRequest($container);
+        $client = $this->mockAPIRequest($container);
         $send = new Send($client);
 
         $params = ['any-parameter' => 'any-parameter-value'];
@@ -24,7 +24,7 @@ class SendTest extends UnitTestCase
     public function use_multipart_option_to_send_files()
     {
         $container = [];
-        $client = $this->mockElasticEmailAPIRequest($container);
+        $client = $this->mockAPIRequest($container);
         $send = new Send($client);
 
         $params = [$name = 'any-parameter' => $content = 'file-content'];
@@ -34,5 +34,4 @@ class SendTest extends UnitTestCase
 
         $this->assertAPIRequestMultipartHas($expected, $container);
     }
-
 }

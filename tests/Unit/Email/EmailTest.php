@@ -12,7 +12,7 @@ class EmailTest extends UnitTestCase
     /** @test */
     public function has_access_to_send_client()
     {
-        $client = $this->mockElasticEmailAPIRequest();
+        $client = $this->mockAPIRequest();
 
         $email = new Email($client);
 
@@ -22,7 +22,7 @@ class EmailTest extends UnitTestCase
     /** @test */
     public function has_access_to_email_status_check()
     {
-        $client = $this->mockElasticEmailAPIRequest();
+        $client = $this->mockAPIRequest();
 
         $email = new Email($client);
 

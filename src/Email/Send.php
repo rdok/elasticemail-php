@@ -31,7 +31,7 @@ class Send extends Response
 
     protected function transform(array $params, $multipartOption)
     {
-        if (!$multipartOption) {
+        if (! $multipartOption) {
             return ['form_params' => $params];
         }
 

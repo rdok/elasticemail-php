@@ -2,12 +2,12 @@
 
 namespace ElasticEmail;
 
+use Exception;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-
 
 /** HTTP client: sets correct base URI & api key and other middlewares. */
 class Client extends \GuzzleHttp\Client
@@ -18,8 +18,7 @@ class Client extends \GuzzleHttp\Client
         string $apiKey,
         array $middlewares = [],
         $handler = null
-    )
-    {
+    ) {
         if (empty($apiKey)) {
             throw new ElasticEmailException('ElasticEmail API key is missing.');
         }
@@ -39,7 +38,9 @@ class Client extends \GuzzleHttp\Client
                 function (RequestInterface $request) use ($apikey) {
                     return $request->withUri(
                         Uri::withQueryValue(
-                            $request->getUri(), 'apikey', $apikey
+                            $request->getUri(),
+                            'apikey',
+                            $apikey
                         )
                     );
                 }
@@ -51,11 +52,12 @@ class Client extends \GuzzleHttp\Client
 
                 try {
                     $body = json_decode((string)$response->getBody(), true);
-                } catch (\Exception $error) {
-                    throw new ElasticEmailException('Unable to decode JSON response.');
+                } catch (Exception $error) {
+                    $genericError = 'Unable to decode JSON response.';
+                    throw new ElasticEmailException($genericError);
                 }
 
-                if (!$body['success']) {
+                if (! $body['success']) {
                     throw new ElasticEmailException($body['error']);
                 }
 

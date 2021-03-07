@@ -11,18 +11,18 @@ use Tests\TestCase;
 
 class UnitTestCase extends TestCase
 {
-    protected function mockAPIStatus(&$container = [], $key = 'key')
+    protected function mockAPIStatus(&$container = [], $key = 'key'): Client
     {
         $history = Middleware::history($container);
 
-        $mockHandler = new MockHandler([
-            new Response(200, [], json_encode(['success' => true, 'data' => 'mocked-data'])),
-        ]);
+        $body = json_encode(['success' => true, 'data' => 'mocked-data']);
+        $response = new Response(200, [], $body);
+        $mockHandler = new MockHandler([$response]);
 
         return new Client($key, [$history], $mockHandler);
     }
 
-    protected function mockElasticEmailAPIRequest(&$container = [], $key = 'key')
+    protected function mockAPIRequest(&$container = [], $key = 'key'): Client
     {
         $history = Middleware::history($container);
         $mockHandler = new MockHandler([
@@ -52,8 +52,10 @@ class UnitTestCase extends TestCase
         $this->assertCount(1, $container, $error);
     }
 
-    protected function assertAPIRequestMultipartHas(array $params, array $container)
-    {
+    protected function assertAPIRequestMultipartHas(
+        array $params,
+        array $container
+    ) {
         $this->assertMiddlewarePushed($container);
         $this->assertArrayHasKey('request', $container[0]);
 
@@ -68,7 +70,8 @@ class UnitTestCase extends TestCase
         $expected = sprintf("\r\n%s\r\n", $params['contents']);
         $this->assertStringContainsString($expected, $contents);
 
-        $expected = sprintf("Content-Length: %s\r\n", strlen($params['contents']));
+        $contents = strlen($params['contents']);
+        $expected = sprintf("Content-Length: %s\r\n", $contents);
         $this->assertStringContainsString($expected, $contents);
     }
 

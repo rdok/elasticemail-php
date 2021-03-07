@@ -12,7 +12,7 @@ class ClientTest extends UnitTestCase
     {
         $container = [];
 
-        $client = $this->mockElasticEmailAPIRequest($container, $key = 'key');
+        $client = $this->mockAPIRequest($container, $key = 'key');
 
         $client->request('POST');
 
@@ -32,7 +32,7 @@ class ClientTest extends UnitTestCase
     {
         $container = [];
 
-        $client = $this->mockElasticEmailAPIRequest($container, $key = 'key');
+        $client = $this->mockAPIRequest($container, $key = 'key');
 
         $client->request('POST');
 

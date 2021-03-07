@@ -41,5 +41,4 @@ abstract class Response
     {
         return $this->getBody()->error;
     }
-
 }
