@@ -1,0 +1,17 @@
+name: code-sniffer
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: PHPCS
+        run: |
+          docker-compose run --rm php7.2 sh -c '\
+            composer install && \
+            ./vendor/bin/phpcs
+          '
