@@ -70,8 +70,8 @@ class UnitTestCase extends TestCase
         $expected = sprintf("\r\n%s\r\n", $params['contents']);
         $this->assertStringContainsString($expected, $contents);
 
-        $contents = strlen($params['contents']);
-        $expected = sprintf("Content-Length: %s\r\n", $contents);
+        $contentsLength = strlen($params['contents']);
+        $expected = sprintf("Content-Length: %s\r\n", $contentsLength);
         $this->assertStringContainsString($expected, $contents);
     }
 
