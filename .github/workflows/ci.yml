@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  validate-composer:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate composer.json and composer.lock
+        run: make validate
+  phpunit:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: make test-php7-2
+      - run: make test-php7-3
+      - run: make test-php7-4
+      - run: make test-php8-0
+  phpcs:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Composer install
+        run: docker-compose run --rm php7.2 composer install
+      - name: phpcs
+        run: docker-compose run --rm php7.2 ./vendor/bin/phpcs
