@@ -3,7 +3,7 @@
 [![integration_tests][integration_tests_badge]][integration_tests]  
 [![Packagaist][packagist_badge]][packagist]
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/386386ba-fbe5-4a50-a51c-07bfd7b3617f/mini.png)](https://insight.sensiolabs.com/projects/386386ba-fbe5-4a50-a51c-07bfd7b3617f)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rdok/elasticemail-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/rdok/elasticemail-php/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rdok/elasticemail-php/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/rdok/elasticemail-php/?branch=main)
   
 ElasticEmailPHP is a PHP Library for interacting with [Elastic Email platform API](http://api.elasticemail.com/public/help).
 
