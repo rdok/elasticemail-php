@@ -2,6 +2,7 @@
   "name": "rdok/elasticemail-php",
   "description": "Integration to the Elastic Email API http://api.elasticemail.com/public/help",
   "license": "MIT",
+  "type": "library",
   "authors": [
     {
       "name": "Rizart Dokollari",
