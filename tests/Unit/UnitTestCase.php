@@ -7,6 +7,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use org\bovigo\vfs\vfsStream;
 use Tests\TestCase;
 
 class UnitTestCase extends TestCase
@@ -52,8 +53,8 @@ class UnitTestCase extends TestCase
         $this->assertCount(1, $container, $error);
     }
 
-    protected function assertAPIRequestMultipartHas(
-        array $params,
+    protected function assertAPIRequestHasMultipartField(
+        array $expectedParams,
         array $container
     ) {
         $this->assertMiddlewarePushed($container);
@@ -62,17 +63,32 @@ class UnitTestCase extends TestCase
         /** @var Request $request */
         $request = $container[0]['request'];
 
-        $contents = $request->getBody()->getContents();
+        $contents = (string)$request->getBody();
 
-        $expected = sprintf('name="%s"', $params['name']);
-        $this->assertStringContainsString($expected, $contents);
+        foreach($expectedParams as $key => $value) {
+            $expected = sprintf('Content-Disposition: form-data; name="%s"', $key);
+            $this->assertStringContainsString($expected, $contents);
+            $this->assertStringContainsString($value, $contents);
+        }
+    }
 
-        $expected = sprintf("\r\n%s\r\n", $params['contents']);
-        $this->assertStringContainsString($expected, $contents);
+    protected function assertAPIRequestHasMultipartFile(
+        array $expectedParams,
+        array $container
+    ) {
+        $this->assertMiddlewarePushed($container);
+        $this->assertArrayHasKey('request', $container[0]);
 
-        $contentsLength = strlen($params['contents']);
-        $expected = sprintf("Content-Length: %s\r\n", $contentsLength);
-        $this->assertStringContainsString($expected, $contents);
+        /** @var Request $request */
+        $request = $container[0]['request'];
+
+        $contents = (string)$request->getBody();
+
+        foreach($expectedParams as $key => $value) {
+            $expected = sprintf('Content-Disposition: form-data; name="%s"; filename="%s"', $key, $key);
+            $this->assertStringContainsString($expected, $contents);
+            $this->assertStringContainsString($value, $contents);
+        }
     }
 
     protected function assertAPIRequestQueryHas($container, $string)
@@ -94,5 +110,14 @@ class UnitTestCase extends TestCase
         $request = $container[0]['request'];
 
         $this->assertEquals($string, $request->getUri()->getHost());
+    }
+
+    protected function makeAttachment($content): string
+    {
+        $root = vfsStream::setup();
+        $attachmentPath = $root->url() . '/lorem.txt';
+
+        file_put_contents($attachmentPath, serialize($content));
+        return $attachmentPath;
     }
 }
