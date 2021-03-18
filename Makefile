@@ -16,6 +16,7 @@ linter-fix:
 	docker-compose run --rm php7.2 ./vendor/bin/phpcbf
 linter:
 	docker-compose run --rm php7.2 ./vendor/bin/phpcs
+
 check: validate test linter
 
 ################################################################################
@@ -41,7 +42,7 @@ test-php8-0:
 test-integration-email-send:
 	docker-compose run --rm php7.2 sh -c '\
 		composer install && \
-		./vendor/bin/phpunit send_an_email \
+		./vendor/bin/phpunit --filter send_an_email \
 	'
 
 test-integration-email-send-attachment:
