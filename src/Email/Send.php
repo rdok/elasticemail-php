@@ -20,18 +20,18 @@ class Send extends Response
         $this->client = $client;
     }
 
-    public function handle(array $params = [], $muiltipartOption = false)
+    public function handle(array $params = [], $attachmentPaths = [])
     {
-        $options = $this->transform($params, $muiltipartOption);
+        $options = $this->transform($params, $attachmentPaths);
 
         $this->response = $this->client->request('POST', self::URI, $options);
 
         return $this;
     }
 
-    protected function transform(array $params, $multipartOption)
+    protected function transform(array $params, array $attachmentPaths = [])
     {
-        if (! $multipartOption) {
+        if (empty($attachmentPaths)) {
             return ['form_params' => $params];
         }
 
@@ -41,6 +41,17 @@ class Send extends Response
             $multipart[] = [
                 'name' => $key,
                 'contents' => $value
+            ];
+        }
+
+        foreach ($attachmentPaths as $path) {
+            $pathParts = explode(DIRECTORY_SEPARATOR, $path);
+            $filename = end($pathParts);
+
+            $multipart[] = [
+                'name' => $filename,
+                'contents' => fopen($path, 'r'),
+                'filename' => $filename
             ];
         }
 

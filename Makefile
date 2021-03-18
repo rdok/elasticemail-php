@@ -12,10 +12,12 @@ shell:
 	docker-compose run --rm php7.2 sh
 update:
 	docker-compose run --rm php7.2 composer update
-phpcbf:
+linter-fix:
 	docker-compose run --rm php7.2 ./vendor/bin/phpcbf
-phpcs:
+linter:
 	docker-compose run --rm php7.2 ./vendor/bin/phpcs
+
+check: validate test linter
 
 ################################################################################
 # CI
@@ -40,7 +42,13 @@ test-php8-0:
 test-integration-email-send:
 	docker-compose run --rm php7.2 sh -c '\
 		composer install && \
-		./vendor/bin/phpunit tests/Integration/Email/SendTest \
+		./vendor/bin/phpunit --filter send_an_email \
+	'
+
+test-integration-email-send-attachment:
+	docker-compose run --rm php7.2 sh -c '\
+		composer install && \
+		./vendor/bin/phpunit --filter send_an_email_with_attachment\
 	'
 
 test-integration-email-status:

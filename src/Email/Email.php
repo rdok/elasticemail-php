@@ -18,11 +18,11 @@ class Email
         $this->client = $client;
     }
 
-    public function send(array $params = [])
+    public function send(array $params = [], $attachmentPaths = []): Send
     {
         $send = new Send($this->client);
 
-        return $send->handle($params);
+        return $send->handle($params, $attachmentPaths);
     }
 
     public function status()

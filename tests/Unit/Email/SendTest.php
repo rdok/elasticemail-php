@@ -21,17 +21,22 @@ class SendTest extends UnitTestCase
     }
 
     /** @test */
-    public function use_multipart_option_to_send_files()
+    public function sends_email_with_attachments()
     {
         $container = [];
         $client = $this->mockAPIRequest($container);
         $send = new Send($client);
 
-        $params = [$name = 'any-parameter' => $content = 'file-content'];
-        $expected = ['name' => $name, 'contents' => $content];
+        $attachmentPaths = [$this->makeAttachment('attachment-content')];
+        $send->handle(['generic-param' => 'param-contents'], $attachmentPaths);
 
-        $send->handle($params, true);
-
-        $this->assertAPIRequestMultipartHas($expected, $container);
+        $this->assertAPIRequestHasMultipartField(
+            ['generic-param' => 'param-contents'],
+            $container
+        );
+        $this->assertAPIRequestHasMultipartFile(
+            ['lorem.txt' => 'attachment-content'],
+            $container
+        );
     }
 }
