@@ -36,6 +36,7 @@
   "minimum-stability": "stable",
   "scripts": {
     "phpunit": "vendor/bin/phpunit --testsuite Unit",
+    "phpunit:integration": "vendor/bin/phpunit --testsuite Integration",
     "phpunit-watch-unit": "phpunit-watcher watch --testsuite Unit"
   }
 }
