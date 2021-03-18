@@ -112,10 +112,10 @@ class UnitTestCase extends TestCase
         $this->assertEquals($string, $request->getUri()->getHost());
     }
 
-    protected function makeAttachment($content): string
+    protected function makeAttachment($content, $path = '/lorem.txt'): string
     {
         $root = vfsStream::setup();
-        $attachmentPath = $root->url() . '/lorem.txt';
+        $attachmentPath = $root->url() . $path;
 
         file_put_contents($attachmentPath, serialize($content));
         return $attachmentPath;
