@@ -12,10 +12,11 @@ shell:
 	docker-compose run --rm php7.2 sh
 update:
 	docker-compose run --rm php7.2 composer update
-phpcbf:
+linter:
 	docker-compose run --rm php7.2 ./vendor/bin/phpcbf
-phpcs:
+linter-fix:
 	docker-compose run --rm php7.2 ./vendor/bin/phpcs
+check: validate test linter
 
 ################################################################################
 # CI

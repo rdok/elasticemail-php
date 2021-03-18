@@ -65,7 +65,7 @@ class UnitTestCase extends TestCase
 
         $contents = (string)$request->getBody();
 
-        foreach($expectedParams as $key => $value) {
+        foreach ($expectedParams as $key => $value) {
             $expected = sprintf('Content-Disposition: form-data; name="%s"', $key);
             $this->assertStringContainsString($expected, $contents);
             $this->assertStringContainsString($value, $contents);
@@ -84,7 +84,7 @@ class UnitTestCase extends TestCase
 
         $contents = (string)$request->getBody();
 
-        foreach($expectedParams as $key => $value) {
+        foreach ($expectedParams as $key => $value) {
             $expected = sprintf('Content-Disposition: form-data; name="%s"; filename="%s"', $key, $key);
             $this->assertStringContainsString($expected, $contents);
             $this->assertStringContainsString($value, $contents);
