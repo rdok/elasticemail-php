@@ -9,7 +9,21 @@ on:
         description: 'Brief description of new release.'
         required: true
 jobs:
+  integration-test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          docker-compose run \
+            -e ELASTIC_EMAIL_API_KEY=${{ secrets.ELASTIC_EMAIL_API_KEY }} \
+            -e TEST_EMAIL_FROM=${{ secrets.TEST_EMAIL_FROM }} \
+            -e TEST_EMAIL_TO=${{ secrets.TEST_EMAIL_TO }} \
+            -e CI=true \
+            --rm php7.2 sh -c '\
+              composer install && composer phpunit:integration
+            '
   tag-and-publish:
+    needs: [integration-test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
