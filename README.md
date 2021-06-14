@@ -1,6 +1,8 @@
 # ElasticEmailPHP 
+[![Total Downloads](http://poser.pugx.org/rdok/elasticemail-php/downloads)](https://packagist.org/packages/rdok/elasticemail-php)
+[![License](http://poser.pugx.org/rdok/elasticemail-php/license)](https://packagist.org/packages/rdok/elasticemail-php)
+[![Latest Stable Version](http://poser.pugx.org/rdok/elasticemail-php/v)](https://packagist.org/packages/rdok/elasticemail-php)
 [![ci][ci_badge]][ci] 
-[![Packagaist][packagist_badge]][packagist]
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rdok/elasticemail-php/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/rdok/elasticemail-php/?branch=main)
   
 ElasticEmailPHP is a PHP Library for interacting with [Elastic Email platform API](http://api.elasticemail.com/public/help).
