@@ -12,7 +12,7 @@ jobs:
   integration-test:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - run: |
           docker-compose run \
             -e ELASTIC_EMAIL_API_KEY=${{ secrets.ELASTIC_EMAIL_API_KEY }} \
@@ -26,7 +26,7 @@ jobs:
     needs: [integration-test]
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
       - name: Setup GitHub action user
         run: |
           git config --local user.email "action@github.com"
